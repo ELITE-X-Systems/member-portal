@@ -10,8 +10,8 @@
       "rank": "Associate",
       "idStatus": "Active",
       "monthlyEarned": 275.0,
-      "deductions": 100.0,
-      "overallNet": 175.0,
+      "deductions": 50.0,
+      "overallNet": 225.0,
       "status": "ACTIVE",
       "weeklyEntries": [
         {
@@ -102,7 +102,7 @@
       "date": "2026-09-11",
       "type": "DEDUCTION",
       "description": "Rule Violation",
-      "amount": 100.0
+      "amount": 50.0
     }
   ],
   "monthlyArchive": {
