@@ -1,0 +1,130 @@
+{
+  "version": "1.0",
+  "currency": "BONDS 💴",
+  "source": "ELITE X Private Staff Records",
+  "generatedAt": "2026-09-11",
+  "members": [
+    {
+      "id": "ELX-001",
+      "name": "Izumi",
+      "rank": "Associate",
+      "idStatus": "Active",
+      "monthlyEarned": 275.0,
+      "deductions": 50.0,
+      "overallNet": 225.0,
+      "status": "ACTIVE",
+      "weeklyEntries": [
+        {
+          "week": "Week 1",
+          "entry": 1,
+          "bonds": 98.0
+        },
+        {
+          "week": "Week 1",
+          "entry": 2,
+          "bonds": 40.0
+        },
+        {
+          "week": "Week 1",
+          "entry": 3,
+          "bonds": 99.0
+        },
+        {
+          "week": "Week 1",
+          "entry": 4,
+          "bonds": 38.0
+        }
+      ]
+    },
+    {
+      "id": "ELX-002",
+      "name": "Yukari",
+      "rank": "Associate",
+      "idStatus": "Active",
+      "monthlyEarned": 268.0,
+      "deductions": 0.0,
+      "overallNet": 268.0,
+      "status": "ACTIVE",
+      "weeklyEntries": [
+        {
+          "week": "Week 1",
+          "entry": 1,
+          "bonds": 80.0
+        },
+        {
+          "week": "Week 1",
+          "entry": 2,
+          "bonds": 50.0
+        },
+        {
+          "week": "Week 1",
+          "entry": 3,
+          "bonds": 98.0
+        },
+        {
+          "week": "Week 1",
+          "entry": 4,
+          "bonds": 40.0
+        }
+      ]
+    },
+    {
+      "id": "ELX-003",
+      "name": "Leonix",
+      "rank": "Associate",
+      "idStatus": "Active",
+      "monthlyEarned": 239.0,
+      "deductions": 0.0,
+      "overallNet": 239.0,
+      "status": "ACTIVE",
+      "weeklyEntries": [
+        {
+          "week": "Week 1",
+          "entry": 1,
+          "bonds": 95.0
+        },
+        {
+          "week": "Week 1",
+          "entry": 2,
+          "bonds": 45.0
+        },
+        {
+          "week": "Week 1",
+          "entry": 3,
+          "bonds": 99.0
+        }
+      ]
+    }
+  ],
+  "transactions": [
+    {
+      "memberId": "ELX-001",
+      "date": "2026-09-11",
+      "type": "DEDUCTION",
+      "description": "Rule Violation",
+      "amount": 50.0
+    }
+  ],
+  "monthlyArchive": {
+    "ELX-001": {
+      "September": 0.0,
+      "October": 0.0,
+      "November": 0.0,
+      "December": 0.0
+    },
+    "ELX-002": {
+      "September": 0.0,
+      "October": 0.0,
+      "November": 0.0,
+      "December": 0.0
+    },
+    "ELX-003": {
+      "September": 0.0,
+      "October": 0.0,
+      "November": 0.0,
+      "December": 0.0
+    }
+  },
+  "activityLog": [],
+  "activityMappingNote": "Current Activity Log has no Member ID, so detailed activity-log rows are not attributed to members."
+}
