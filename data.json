@@ -10,8 +10,8 @@
       "rank": "Vassal",
       "idStatus": "Active",
       "monthlyEarned": 275.0,
-      "deductions": 50.0,
-      "overallNet": 225.0,
+      "deductions": 56.0,
+      "overallNet": 219.0,
       "status": "ACTIVE",
       "weeklyEntries": [
         {
@@ -42,8 +42,8 @@
       "rank": "Vestige",
       "idStatus": "Active",
       "monthlyEarned": 268.0,
-      "deductions": 99.0,
-      "overallNet": 169.0,
+      "deductions": 105.0,
+      "overallNet": 163.0,
       "status": "ACTIVE",
       "weeklyEntries": [
         {
@@ -126,6 +126,20 @@
       "type": "SHOP PURCHASE",
       "description": "Something",
       "amount": 99.0
+    },
+    {
+      "memberId": "ELX-002",
+      "date": "2026-09-11",
+      "type": "DEDUCTION",
+      "description": "Rule Violation",
+      "amount": 6.0
+    },
+    {
+      "memberId": "ELX-001",
+      "date": "2026-09-11",
+      "type": "SHOP PURCHASE",
+      "description": "Something",
+      "amount": 6.0
     }
   ],
   "monthlyArchive": {
