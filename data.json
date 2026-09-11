@@ -39,11 +39,11 @@
     {
       "id": "ELX-002",
       "name": "Yukari",
-      "rank": "Vassal",
+      "rank": "Vestige",
       "idStatus": "Active",
       "monthlyEarned": 268.0,
-      "deductions": 0.0,
-      "overallNet": 268.0,
+      "deductions": 99.0,
+      "overallNet": 169.0,
       "status": "ACTIVE",
       "weeklyEntries": [
         {
@@ -119,6 +119,13 @@
       "type": "DEDUCTION",
       "description": "Rule Violation",
       "amount": 50.0
+    },
+    {
+      "memberId": "ELX-002",
+      "date": "2026-09-10",
+      "type": "SHOP PURCHASE",
+      "description": "Something",
+      "amount": 99.0
     }
   ],
   "monthlyArchive": {
