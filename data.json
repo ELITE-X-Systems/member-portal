@@ -7,7 +7,7 @@
     {
       "id": "ELX-001",
       "name": "Izumi",
-      "rank": "Associate",
+      "rank": "Vassal",
       "idStatus": "Active",
       "monthlyEarned": 275.0,
       "deductions": 50.0,
@@ -39,7 +39,7 @@
     {
       "id": "ELX-002",
       "name": "Yukari",
-      "rank": "Associate",
+      "rank": "Vassal",
       "idStatus": "Active",
       "monthlyEarned": 268.0,
       "deductions": 0.0,
@@ -71,11 +71,11 @@
     {
       "id": "ELX-003",
       "name": "Leonix",
-      "rank": "Associate",
+      "rank": "Patron",
       "idStatus": "Active",
-      "monthlyEarned": 239.0,
+      "monthlyEarned": 1239.0,
       "deductions": 0.0,
-      "overallNet": 239.0,
+      "overallNet": 1239.0,
       "status": "ACTIVE",
       "weeklyEntries": [
         {
@@ -92,8 +92,24 @@
           "week": "Week 1",
           "entry": 3,
           "bonds": 99.0
+        },
+        {
+          "week": "Week 1",
+          "entry": 4,
+          "bonds": 1000.0
         }
       ]
+    },
+    {
+      "id": "ELX-004",
+      "name": "Luxeira",
+      "rank": "Vestige",
+      "idStatus": "Active",
+      "monthlyEarned": 0.0,
+      "deductions": 0.0,
+      "overallNet": 0.0,
+      "status": "NOT SUBMITTED",
+      "weeklyEntries": []
     }
   ],
   "transactions": [
@@ -119,6 +135,12 @@
       "December": 0.0
     },
     "ELX-003": {
+      "September": 0.0,
+      "October": 0.0,
+      "November": 0.0,
+      "December": 0.0
+    },
+    "ELX-004": {
       "September": 0.0,
       "October": 0.0,
       "November": 0.0,
