@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b0a10">
+  <meta name="description" content="ELITE X public Bond Account portal.">
+  <title>ELITE X · Bond Account</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="site-header">
+      <div class="brand">
+        <img src="assets/elite-x-logo.jpg" alt="ELITE X emblem" class="brand-mark">
+        <div>
+          <div class="eyebrow">THE ELITE COURT</div>
+          <h1>ELITE X</h1>
+          <p>PUBLIC MEMBER PORTAL</p>
+        </div>
+      </div>
+      <div class="header-note">BONDS <span>💴</span></div>
+    </header>
+
+    <main>
+      <section class="search-panel" aria-labelledby="portal-title">
+        <div class="section-kicker">MEMBER ACCESS</div>
+        <h2 id="portal-title">View your Bond Account</h2>
+        <p class="muted">Enter your official Member ID. Your ID is the primary account identifier.</p>
+        <form id="lookup-form" class="lookup">
+          <label for="member-id">MEMBER ID</label>
+          <div class="lookup-row">
+            <input id="member-id" name="member-id" inputmode="text" autocomplete="off" placeholder="ELX-001" maxlength="20" required>
+            <button type="submit">VIEW ACCOUNT</button>
+          </div>
+          <div id="lookup-message" class="lookup-message" role="status"></div>
+        </form>
+      </section>
+
+      <section id="account" class="account hidden" aria-live="polite">
+        <div class="account-card">
+          <div class="account-top">
+            <div>
+              <div class="section-kicker">ELITE X · BOND ACCOUNT</div>
+              <h2 id="member-name">—</h2>
+              <div class="member-id-line" id="member-id-display">—</div>
+            </div>
+            <div class="status-pill" id="member-status">—</div>
+          </div>
+
+          <div class="identity-grid">
+            <div><span>RANK</span><strong id="member-rank">—</strong></div>
+            <div><span>ID STATUS</span><strong id="member-id-status">—</strong></div>
+          </div>
+
+          <div class="balance">
+            <div class="balance-label">AVAILABLE / NET BONDS</div>
+            <div class="balance-value" id="net-bonds">0 <small>💴</small></div>
+          </div>
+        </div>
+
+        <section class="section">
+          <div class="section-heading">
+            <div>
+              <div class="section-kicker">ACCOUNT SUMMARY</div>
+              <h3>Bond Overview</h3>
+            </div>
+          </div>
+          <div class="summary-grid">
+            <article class="metric">
+              <span>CURRENT MONTH EARNED</span>
+              <strong id="earned">0</strong><em>💴</em>
+            </article>
+            <article class="metric">
+              <span>DEDUCTIONS</span>
+              <strong id="deductions">0</strong><em>💴</em>
+            </article>
+            <article class="metric">
+              <span>SHOP SPENDING</span>
+              <strong id="shop">0</strong><em>💴</em>
+            </article>
+            <article class="metric metric-net">
+              <span>NET BONDS</span>
+              <strong id="net-summary">0</strong><em>💴</em>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <div>
+              <div class="section-kicker">RECORDED EARNINGS</div>
+              <h3>Bond Activity</h3>
+            </div>
+          </div>
+          <div id="activity-list" class="activity-list"></div>
+          <div id="activity-note" class="source-note"></div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <div>
+              <div class="section-kicker">ACCOUNT STATEMENT</div>
+              <h3>Transaction History</h3>
+            </div>
+          </div>
+          <div id="transaction-list" class="transaction-list"></div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <div>
+              <div class="section-kicker">ARCHIVE</div>
+              <h3>Monthly Record</h3>
+            </div>
+          </div>
+          <div id="monthly-list" class="monthly-list"></div>
+        </section>
+
+        <div class="display-only">
+          <span class="dot"></span>
+          DISPLAY ONLY · STAFF RECORDS ARE THE SOURCE OF TRUTH
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>ELITE X · BONDS 💴</span>
+      <span>PUBLIC MEMBER PORTAL</span>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
