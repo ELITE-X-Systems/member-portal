@@ -51,6 +51,8 @@
           <div class="identity-grid">
             <div><span>RANK</span><strong id="member-rank">—</strong></div>
             <div><span>ID STATUS</span><strong id="member-id-status">—</strong></div>
+            <div><span>MEMBER STATUS</span><strong id="member-status">—</strong></div>
+            <div><span>JOIN DATE</span><strong id="member-join-date">—</strong></div>
           </div>
 
           <div class="balance">
@@ -83,6 +85,65 @@
               <span>NET BONDS</span>
               <strong id="net-summary">0</strong><em>💴</em>
             </article>
+          </div>
+        </section>
+
+        <section class="section awards-section" aria-labelledby="awards-title">
+          <div class="section-heading">
+            <div>
+              <div class="section-kicker">ELITE X HONOURS</div>
+              <h3 id="awards-title">Awards &amp; Achievements</h3>
+            </div>
+          </div>
+
+          <div class="awards-summary" aria-label="Award totals">
+            <article class="award-count award-count-crest">
+              <span>CRESTS</span>
+              <strong id="crest-count">00</strong>
+            </article>
+            <article class="award-count award-count-medallion">
+              <span>MEDALLIONS</span>
+              <strong id="medallion-count">00</strong>
+            </article>
+          </div>
+
+          <div id="awards-empty" class="awards-empty hidden" role="status">
+            NO AWARDS RECORDED
+          </div>
+
+          <div class="awards-groups">
+            <section class="award-group award-group-medallion" aria-labelledby="medallions-title">
+              <div class="award-group-heading">
+                <span class="award-mark award-mark-medallion" aria-hidden="true"></span>
+                <div>
+                  <div class="section-kicker">MEDALLION</div>
+                  <h4 id="medallions-title">Medallions</h4>
+                </div>
+              </div>
+              <div id="medallion-list" class="award-list"></div>
+            </section>
+
+            <section class="award-group award-group-crest" aria-labelledby="crests-title">
+              <div class="award-group-heading">
+                <span class="award-mark award-mark-crest" aria-hidden="true"></span>
+                <div>
+                  <div class="section-kicker">CREST</div>
+                  <h4 id="crests-title">Crests</h4>
+                </div>
+              </div>
+              <div id="crest-list" class="award-list"></div>
+            </section>
+
+            <section class="award-group award-group-achievement" aria-labelledby="achievements-title">
+              <div class="award-group-heading">
+                <span class="award-mark award-mark-achievement" aria-hidden="true"></span>
+                <div>
+                  <div class="section-kicker">RECOGNITION</div>
+                  <h4 id="achievements-title">Achievements</h4>
+                </div>
+              </div>
+              <div id="achievement-list" class="award-list"></div>
+            </section>
           </div>
         </section>
 
@@ -131,4 +192,5 @@
   </div>
   <script src="script.js"></script>
 </body>
-</html>
+  </html>
+          
