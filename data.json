@@ -114,13 +114,34 @@
     {
       "id": "ELX-005",
       "name": "Fleur",
-      "rank": "Vestige",
+      "rank": "Vassal",
       "idStatus": "Active",
-      "monthlyEarned": 0.0,
+      "monthlyEarned": 309.0,
       "deductions": 0.0,
-      "overallNet": 0.0,
-      "status": "NOT SUBMITTED",
-      "weeklyEntries": []
+      "overallNet": 309.0,
+      "status": "ACTIVE",
+      "weeklyEntries": [
+        {
+          "week": "Week 1",
+          "entry": 1,
+          "bonds": 100.0
+        },
+        {
+          "week": "Week 1",
+          "entry": 2,
+          "bonds": 50.0
+        },
+        {
+          "week": "Week 1",
+          "entry": 3,
+          "bonds": 99.0
+        },
+        {
+          "week": "Week 1",
+          "entry": 4,
+          "bonds": 60.0
+        }
+      ]
     }
   ],
   "transactions": [
