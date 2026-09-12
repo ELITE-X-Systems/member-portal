@@ -10,7 +10,7 @@
       "rank": "Paramount",
       "status": "ACTIVE",
       "joinDate": "2026-09-10",
-      "crests": 1,
+      "crests": 2,
       "medallion": 0,
       "idStatus": "ACTIVE",
       "monthlyEarned": 5275.0,
@@ -221,6 +221,13 @@
       "date": "2026-09-11",
       "category": "ACHIEVEMENT",
       "name": "NAME",
+      "status": "EARNED"
+    },
+    {
+      "memberId": "ELX-001",
+      "date": "2026-10-11",
+      "category": "CREST",
+      "name": "2 Month Member",
       "status": "EARNED"
     }
   ],
