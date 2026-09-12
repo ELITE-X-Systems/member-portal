@@ -6,165 +6,50 @@
   "members": [
     {
       "id": "ELX-001",
-      "name": "Izumi",
-      "rank": "Paramount",
+      "name": "Member",
+      "rank": "Vassal",
       "status": "ACTIVE",
-      "joinDate": "2026-09-10",
-      "crests": 5,
+      "joinDate": "2026-09-12",
+      "crests": 0,
       "medallion": 0,
-      "idStatus": "ACTIVE",
-      "monthlyEarned": 5275.0,
-      "deductions": 56.0,
-      "overallNet": 5219.0,
+      "idStatus": "",
+      "monthlyEarned": 0.0,
+      "deductions": 0.0,
+      "overallNet": 0.0,
       "weeklyEntries": [
         {
           "week": "Week 1",
           "entry": 1,
-          "bonds": 98.0
+          "bonds": 60.0
         },
         {
           "week": "Week 1",
           "entry": 2,
-          "bonds": 40.0
-        },
-        {
-          "week": "Week 1",
-          "entry": 3,
-          "bonds": 99.0
-        },
-        {
-          "week": "Week 1",
-          "entry": 4,
-          "bonds": 38.0
-        },
-        {
-          "week": "Week 2",
-          "entry": 1,
-          "bonds": 5000.0
-        }
-      ]
-    },
-    {
-      "id": "ELX-002",
-      "name": "Yukari",
-      "rank": "Vestige",
-      "status": "ON LEAVE",
-      "joinDate": "2026-09-09",
-      "crests": 0,
-      "medallion": 1,
-      "idStatus": "ACTIVE",
-      "monthlyEarned": 268.0,
-      "deductions": 105.0,
-      "overallNet": 163.0,
-      "weeklyEntries": [
-        {
-          "week": "Week 1",
-          "entry": 1,
           "bonds": 80.0
         },
         {
           "week": "Week 1",
-          "entry": 2,
+          "entry": 3,
+          "bonds": 90.0
+        },
+        {
+          "week": "Week 1",
+          "entry": 4,
+          "bonds": 30.0
+        },
+        {
+          "week": "Week 2",
+          "entry": 1,
           "bonds": 50.0
         },
         {
-          "week": "Week 1",
-          "entry": 3,
-          "bonds": 98.0
-        },
-        {
-          "week": "Week 1",
-          "entry": 4,
-          "bonds": 40.0
-        }
-      ]
-    },
-    {
-      "id": "ELX-003",
-      "name": "Leonix",
-      "rank": "Patron",
-      "status": "INACTIVE",
-      "joinDate": "",
-      "crests": 0,
-      "medallion": 0,
-      "idStatus": "ACTIVE",
-      "monthlyEarned": 1239.0,
-      "deductions": 0.0,
-      "overallNet": 1239.0,
-      "weeklyEntries": [
-        {
-          "week": "Week 1",
-          "entry": 1,
-          "bonds": 95.0
-        },
-        {
-          "week": "Week 1",
+          "week": "Week 2",
           "entry": 2,
-          "bonds": 45.0
+          "bonds": 30.0
         },
         {
-          "week": "Week 1",
+          "week": "Week 2",
           "entry": 3,
-          "bonds": 99.0
-        },
-        {
-          "week": "Week 1",
-          "entry": 4,
-          "bonds": 1000.0
-        }
-      ]
-    },
-    {
-      "id": "ELX-004",
-      "name": "Luxeira",
-      "rank": "Cipher",
-      "status": "REMOVED",
-      "joinDate": "",
-      "crests": 0,
-      "medallion": 0,
-      "idStatus": "ACTIVE",
-      "monthlyEarned": 500.0,
-      "deductions": 0.0,
-      "overallNet": 500.0,
-      "weeklyEntries": [
-        {
-          "week": "Week 1",
-          "entry": 1,
-          "bonds": 500.0
-        }
-      ]
-    },
-    {
-      "id": "ELX-005",
-      "name": "Fleur",
-      "rank": "Vassal",
-      "status": "RESIGNED",
-      "joinDate": "",
-      "crests": 0,
-      "medallion": 0,
-      "idStatus": "ACTIVE",
-      "monthlyEarned": 309.0,
-      "deductions": 0.0,
-      "overallNet": 309.0,
-      "weeklyEntries": [
-        {
-          "week": "Week 1",
-          "entry": 1,
-          "bonds": 100.0
-        },
-        {
-          "week": "Week 1",
-          "entry": 2,
-          "bonds": 50.0
-        },
-        {
-          "week": "Week 1",
-          "entry": 3,
-          "bonds": 99.0
-        },
-        {
-          "week": "Week 1",
-          "entry": 4,
           "bonds": 60.0
         }
       ]
@@ -173,97 +58,22 @@
   "transactions": [
     {
       "memberId": "ELX-001",
-      "date": "2026-09-11",
+      "date": "2026-09-12",
       "type": "DEDUCTION",
-      "description": "Rule Violation",
-      "amount": 50.0
-    },
-    {
-      "memberId": "ELX-002",
-      "date": "2026-09-10",
-      "type": "SHOP PURCHASE",
-      "description": "Something",
-      "amount": 99.0
-    },
-    {
-      "memberId": "ELX-002",
-      "date": "2026-09-11",
-      "type": "DEDUCTION",
-      "description": "Rule Violation",
-      "amount": 6.0
+      "description": "Rule # Violation",
+      "amount": 10.0
     },
     {
       "memberId": "ELX-001",
-      "date": "2026-09-11",
+      "date": "",
       "type": "SHOP PURCHASE",
-      "description": "Something",
-      "amount": 6.0
+      "description": "Item #",
+      "amount": 28.0
     }
   ],
-  "awards": [
-    {
-      "memberId": "ELX-001",
-      "date": "2026-09-11",
-      "category": "CREST",
-      "name": "1 Month Member",
-      "status": "EARNED",
-      "hostedBy": "ELITE X"
-    },
-    {
-      "memberId": "ELX-002",
-      "date": "2026-09-10",
-      "category": "ACHIEVEMENT",
-      "name": "AWARD NAME",
-      "status": "EARNED"
-    },
-    {
-      "memberId": "ELX-002",
-      "date": "2026-09-11",
-      "category": "MEDALLION",
-      "name": "1 Year Member",
-      "status": "EARNED"
-    },
-    {
-      "memberId": "ELX-001",
-      "date": "2026-09-11",
-      "category": "ACHIEVEMENT",
-      "name": "NAME",
-      "status": "EARNED"
-    },
-    {
-      "memberId": "ELX-001",
-      "date": "2026-10-11",
-      "category": "CREST",
-      "name": "2 Month Member",
-      "status": "EARNED"
-    }
-  ],
+  "awards": [],
   "monthlyArchive": {
     "ELX-001": {
-      "September": 0.0,
-      "October": 0.0,
-      "November": 0.0,
-      "December": 0.0
-    },
-    "ELX-002": {
-      "September": 0.0,
-      "October": 0.0,
-      "November": 0.0,
-      "December": 0.0
-    },
-    "ELX-003": {
-      "September": 0.0,
-      "October": 0.0,
-      "November": 0.0,
-      "December": 0.0
-    },
-    "ELX-004": {
-      "September": 0.0,
-      "October": 0.0,
-      "November": 0.0,
-      "December": 0.0
-    },
-    "ELX-005": {
       "September": 0.0,
       "October": 0.0,
       "November": 0.0,
