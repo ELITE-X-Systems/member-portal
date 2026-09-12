@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "currency": "BONDS 💴",
   "source": "ELITE X Private Staff Records",
   "generatedAt": "2026-09-12",
@@ -8,11 +8,14 @@
       "id": "ELX-001",
       "name": "Izumi",
       "rank": "Paramount",
+      "status": "ACTIVE",
+      "joinDate": "2026-09-10",
+      "crests": 1,
+      "medallion": 0,
       "idStatus": "ACTIVE",
       "monthlyEarned": 5275.0,
       "deductions": 56.0,
       "overallNet": 5219.0,
-      "status": "ACTIVE",
       "weeklyEntries": [
         {
           "week": "Week 1",
@@ -45,11 +48,14 @@
       "id": "ELX-002",
       "name": "Yukari",
       "rank": "Vestige",
-      "idStatus": "ON LEAVE",
+      "status": "ON LEAVE",
+      "joinDate": "2026-09-09",
+      "crests": 0,
+      "medallion": 1,
+      "idStatus": "ACTIVE",
       "monthlyEarned": 268.0,
       "deductions": 105.0,
       "overallNet": 163.0,
-      "status": "ACTIVE",
       "weeklyEntries": [
         {
           "week": "Week 1",
@@ -77,11 +83,14 @@
       "id": "ELX-003",
       "name": "Leonix",
       "rank": "Patron",
-      "idStatus": "INACTIVE",
+      "status": "INACTIVE",
+      "joinDate": "",
+      "crests": 0,
+      "medallion": 0,
+      "idStatus": "ACTIVE",
       "monthlyEarned": 1239.0,
       "deductions": 0.0,
       "overallNet": 1239.0,
-      "status": "ACTIVE",
       "weeklyEntries": [
         {
           "week": "Week 1",
@@ -109,11 +118,14 @@
       "id": "ELX-004",
       "name": "Luxeira",
       "rank": "Cipher",
-      "idStatus": "REMOVED",
+      "status": "REMOVED",
+      "joinDate": "",
+      "crests": 0,
+      "medallion": 0,
+      "idStatus": "ACTIVE",
       "monthlyEarned": 500.0,
       "deductions": 0.0,
       "overallNet": 500.0,
-      "status": "ACTIVE",
       "weeklyEntries": [
         {
           "week": "Week 1",
@@ -126,11 +138,14 @@
       "id": "ELX-005",
       "name": "Fleur",
       "rank": "Vassal",
-      "idStatus": "RESIGNED",
+      "status": "RESIGNED",
+      "joinDate": "",
+      "crests": 0,
+      "medallion": 0,
+      "idStatus": "ACTIVE",
       "monthlyEarned": 309.0,
       "deductions": 0.0,
       "overallNet": 309.0,
-      "status": "ACTIVE",
       "weeklyEntries": [
         {
           "week": "Week 1",
@@ -183,6 +198,23 @@
       "type": "SHOP PURCHASE",
       "description": "Something",
       "amount": 6.0
+    }
+  ],
+  "awards": [
+    {
+      "memberId": "ELX-001",
+      "date": "2026-09-11",
+      "category": "CREST",
+      "name": "1 Month Member",
+      "status": "EARNED",
+      "hostedBy": "ELITE X"
+    },
+    {
+      "memberId": "ELX-002",
+      "date": "2026-09-11",
+      "category": "MEDALLION",
+      "name": "1 Year Member",
+      "status": "EARNED"
     }
   ],
   "monthlyArchive": {
