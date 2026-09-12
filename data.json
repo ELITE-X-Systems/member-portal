@@ -53,6 +53,20 @@
           "bonds": 60.0
         }
       ]
+    },
+    {
+      "id": "ELX-002",
+      "name": "Member #2",
+      "rank": "Vestige",
+      "status": "REMOVED",
+      "joinDate": "2026-09-11",
+      "crests": 0,
+      "medallion": 0,
+      "idStatus": "",
+      "monthlyEarned": 0.0,
+      "deductions": 0.0,
+      "overallNet": 0.0,
+      "weeklyEntries": []
     }
   ],
   "transactions": [
@@ -71,9 +85,40 @@
       "amount": 28.0
     }
   ],
-  "awards": [],
+  "awards": [
+    {
+      "memberId": "ELX-001",
+      "date": "2026-09-12",
+      "category": "ACHIEVEMENT",
+      "name": "AWARD NAME",
+      "status": "EARNED",
+      "hostedBy": "Elite-X Overseer"
+    },
+    {
+      "memberId": "ELX-001",
+      "date": "",
+      "category": "ACHIEVEMENT",
+      "name": "name",
+      "status": "EARNED",
+      "hostedBy": "Elite-X Overseer"
+    },
+    {
+      "memberId": "ELX-001",
+      "date": "",
+      "category": "ACHIEVEMENT",
+      "name": ".",
+      "status": "EARNED",
+      "hostedBy": "Elite-X Overseer"
+    }
+  ],
   "monthlyArchive": {
     "ELX-001": {
+      "September": 0.0,
+      "October": 0.0,
+      "November": 0.0,
+      "December": 0.0
+    },
+    "ELX-002": {
       "September": 0.0,
       "October": 0.0,
       "November": 0.0,
