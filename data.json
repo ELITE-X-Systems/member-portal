@@ -7,11 +7,11 @@
     {
       "id": "ELX-001",
       "name": "Izumi",
-      "rank": "Vassal",
+      "rank": "Paramount",
       "idStatus": "Active",
-      "monthlyEarned": 275.0,
+      "monthlyEarned": 5275.0,
       "deductions": 56.0,
-      "overallNet": 219.0,
+      "overallNet": 5219.0,
       "status": "ACTIVE",
       "weeklyEntries": [
         {
@@ -33,6 +33,11 @@
           "week": "Week 1",
           "entry": 4,
           "bonds": 38.0
+        },
+        {
+          "week": "Week 2",
+          "entry": 1,
+          "bonds": 5000.0
         }
       ]
     },
@@ -103,13 +108,19 @@
     {
       "id": "ELX-004",
       "name": "Luxeira",
-      "rank": "Vestige",
+      "rank": "Cipher",
       "idStatus": "Active",
-      "monthlyEarned": 0.0,
+      "monthlyEarned": 500.0,
       "deductions": 0.0,
-      "overallNet": 0.0,
-      "status": "NOT SUBMITTED",
-      "weeklyEntries": []
+      "overallNet": 500.0,
+      "status": "ACTIVE",
+      "weeklyEntries": [
+        {
+          "week": "Week 1",
+          "entry": 1,
+          "bonds": 500.0
+        }
+      ]
     },
     {
       "id": "ELX-005",
