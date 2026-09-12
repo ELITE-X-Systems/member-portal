@@ -110,6 +110,17 @@
       "overallNet": 0.0,
       "status": "NOT SUBMITTED",
       "weeklyEntries": []
+    },
+    {
+      "id": "ELX-005",
+      "name": "Fleur",
+      "rank": "Vestige",
+      "idStatus": "Active",
+      "monthlyEarned": 0.0,
+      "deductions": 0.0,
+      "overallNet": 0.0,
+      "status": "NOT SUBMITTED",
+      "weeklyEntries": []
     }
   ],
   "transactions": [
@@ -162,6 +173,12 @@
       "December": 0.0
     },
     "ELX-004": {
+      "September": 0.0,
+      "October": 0.0,
+      "November": 0.0,
+      "December": 0.0
+    },
+    "ELX-005": {
       "September": 0.0,
       "October": 0.0,
       "November": 0.0,
