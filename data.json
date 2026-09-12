@@ -10,7 +10,7 @@
       "rank": "Paramount",
       "status": "ACTIVE",
       "joinDate": "2026-09-10",
-      "crests": 2,
+      "crests": 5,
       "medallion": 0,
       "idStatus": "ACTIVE",
       "monthlyEarned": 5275.0,
@@ -208,6 +208,13 @@
       "name": "1 Month Member",
       "status": "EARNED",
       "hostedBy": "ELITE X"
+    },
+    {
+      "memberId": "ELX-002",
+      "date": "2026-09-10",
+      "category": "ACHIEVEMENT",
+      "name": "AWARD NAME",
+      "status": "EARNED"
     },
     {
       "memberId": "ELX-002",
