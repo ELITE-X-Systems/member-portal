@@ -852,6 +852,8 @@ button:focus-visible {
 }
 
 
+
+
 /* ---------------------------------------------------------
    12. DISPLAY-ONLY NOTICE
    --------------------------------------------------------- */
@@ -1185,3 +1187,464 @@ footer::before {
     transform: none;
   }
 }
+
+
+/* =========================================================
+   ELITE X — AWARDS + STICKY HEADER INTEGRATION
+   Extends the existing visual system; no new framework.
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   20. STICKY ELITE X HEADER
+   --------------------------------------------------------- */
+
+html {
+  scroll-padding-top: 92px;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
+  min-height: 72px;
+  padding-top: 8px;
+  padding-bottom: 16px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(9, 8, 13, 0.97),
+      rgba(9, 8, 13, 0.88)
+    );
+
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.08);
+
+  transition:
+    background 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.account {
+  scroll-margin-top: 94px;
+}
+
+
+/* ---------------------------------------------------------
+   21. AWARDS SECTION
+   --------------------------------------------------------- */
+
+.awards-section {
+  position: relative;
+}
+
+.awards-section::before {
+  content: "";
+  position: absolute;
+  top: 62px;
+  right: -34px;
+
+  width: 150px;
+  height: 150px;
+
+  border: 1px solid rgba(201, 174, 107, 0.035);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.awards-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.award-count {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 84px;
+  padding: 15px 17px;
+
+  border: 1px solid var(--line);
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(23, 20, 28, 0.96),
+      rgba(18, 16, 23, 0.98)
+    );
+
+  transition:
+    border-color 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.award-count::after {
+  content: "";
+  position: absolute;
+
+  right: 15px;
+  bottom: -26px;
+
+  width: 72px;
+  height: 72px;
+
+  border: 1px solid rgba(201, 174, 107, 0.055);
+  border-radius: 50%;
+}
+
+.award-count:hover {
+  transform: translateY(-2px);
+  border-color: rgba(225, 207, 155, 0.25);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.award-count span {
+  display: block;
+
+  color: var(--muted);
+  font-size: .59rem;
+  font-weight: 600;
+  letter-spacing: .15em;
+}
+
+.award-count strong {
+  display: block;
+  margin-top: 8px;
+
+  color: var(--gold-soft);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.award-count-crest {
+  border-color: rgba(201, 174, 107, 0.24);
+}
+
+.award-count-medallion {
+  border-color: rgba(141, 104, 182, 0.22);
+}
+
+.awards-groups {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.award-group {
+  min-width: 0;
+
+  padding: 16px;
+
+  border: 1px solid var(--line);
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(23, 20, 28, 0.78),
+      rgba(13, 12, 17, 0.88)
+    );
+}
+
+.award-group-heading {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  min-height: 38px;
+  margin-bottom: 12px;
+}
+
+.award-group-heading h4 {
+  margin: 4px 0 0;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.award-mark {
+  position: relative;
+  flex: 0 0 auto;
+
+  width: 32px;
+  height: 32px;
+
+  border: 1px solid rgba(201, 174, 107, 0.48);
+  background: rgba(201, 174, 107, 0.025);
+}
+
+.award-mark-medallion {
+  border-radius: 50%;
+}
+
+.award-mark-medallion::after {
+  content: "";
+  position: absolute;
+
+  inset: 7px;
+
+  border: 1px solid rgba(225, 207, 155, 0.65);
+  border-radius: 50%;
+}
+
+.award-mark-crest {
+  border-radius: 5px 5px 9px 9px;
+  transform: scale(.86) rotate(45deg);
+  border-color: rgba(225, 207, 155, 0.52);
+}
+
+.award-mark-crest::after {
+  content: "✦";
+  position: absolute;
+
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  color: var(--gold-soft);
+  font-size: .75rem;
+
+  transform: rotate(-45deg);
+}
+
+.award-mark-achievement {
+  border-radius: 6px;
+  border-color: rgba(141, 104, 182, 0.45);
+}
+
+.award-mark-achievement::after {
+  content: "";
+  position: absolute;
+
+  left: 7px;
+  right: 7px;
+  top: 9px;
+
+  height: 1px;
+
+  background: rgba(225, 207, 155, 0.52);
+
+  box-shadow:
+    0 5px 0 rgba(225, 207, 155, 0.28),
+    0 10px 0 rgba(225, 207, 155, 0.16);
+}
+
+.award-list {
+  display: grid;
+  gap: 7px;
+}
+
+.award-item {
+  position: relative;
+
+  padding: 12px;
+
+  border: 1px solid rgba(225, 207, 155, 0.11);
+  border-radius: 9px;
+
+  background: rgba(18, 16, 23, 0.72);
+
+  transition:
+    border-color 200ms ease,
+    background 200ms ease,
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.award-item:hover {
+  transform: translateY(-1px);
+
+  border-color: rgba(225, 207, 155, 0.22);
+
+  background: rgba(23, 20, 28, 0.9);
+
+  box-shadow:
+    0 7px 20px rgba(0, 0, 0, 0.12);
+}
+
+.award-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+
+  margin-bottom: 7px;
+}
+
+.award-status {
+  color: var(--gold);
+  font-size: .54rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+.award-item time {
+  color: var(--muted);
+  font-size: .62rem;
+  white-space: nowrap;
+}
+
+.award-item h5 {
+  margin: 0;
+
+  color: var(--ink);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.13rem;
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.award-host {
+  margin-top: 6px;
+
+  color: var(--muted);
+  font-size: .64rem;
+  line-height: 1.4;
+}
+
+.award-empty,
+.awards-empty {
+  border: 1px dashed rgba(225, 207, 155, 0.13);
+  border-radius: 9px;
+
+  color: var(--muted);
+  font-size: .62rem;
+  letter-spacing: .09em;
+  line-height: 1.5;
+}
+
+.award-empty {
+  padding: 13px;
+}
+
+.awards-empty {
+  margin-bottom: 10px;
+  padding: 14px;
+
+  text-align: center;
+
+  background: rgba(201, 174, 107, 0.012);
+}
+
+
+/* ---------------------------------------------------------
+   22. AWARDS TABLET
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) and (min-width: 701px) {
+  .awards-groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .award-group-achievement {
+    grid-column: 1 / -1;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   23. AWARDS MOBILE + STICKY HEADER
+   --------------------------------------------------------- */
+
+@media (max-width: 700px) {
+
+  html {
+    scroll-padding-top: 76px;
+  }
+
+  .site-header {
+    min-height: 58px;
+
+    padding-top: 4px;
+    padding-bottom: 10px;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(9, 8, 13, 0.98),
+        rgba(9, 8, 13, 0.91)
+      );
+
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .account {
+    scroll-margin-top: 78px;
+  }
+
+  .awards-section::before {
+    display: none;
+  }
+
+  .awards-summary {
+    gap: 8px;
+  }
+
+  .award-count {
+    min-height: 76px;
+    padding: 13px;
+  }
+
+  .award-count strong {
+    font-size: 1.75rem;
+  }
+
+  .awards-groups {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .award-group {
+    padding: 14px;
+  }
+
+  .award-group-achievement {
+    grid-column: auto;
+  }
+
+  .award-item:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .award-count:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .award-item-top {
+    align-items: flex-start;
+  }
+
+  .award-item h5 {
+    font-size: 1.08rem;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   24. REDUCED MOTION FOR NEW COMPONENTS
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .site-header,
+  .award-count,
+  .award-item {
+    transition: none !important;
+  }
+  }
+  
