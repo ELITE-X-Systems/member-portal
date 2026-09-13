@@ -45,6 +45,25 @@ function animateNumber(target, value){
   requestAnimationFrame(frame);
 }
 
+function animateCount(target, value){
+  if(!target) return;
+  const finalValue = Math.max(0, Math.floor(Number(value ?? 0)));
+  if(reducedMotion()){
+    target.textContent = String(finalValue).padStart(2, "0");
+    return;
+  }
+  const duration = 420;
+  const start = performance.now();
+  const frame = (now) => {
+    const progress = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(finalValue * eased);
+    target.textContent = String(current).padStart(2, "0");
+    if(progress < 1) requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+}
+
 function renderAwardList(targetId, awards, emptyText){
   const target = $(targetId);
   if(!target) return;
@@ -73,16 +92,16 @@ function renderAwards(member){
     normalize(award.memberId) === memberId && normalize(award.status) === "EARNED"
   );
 
-  animateNumber($("crest-count"), member.crests);
-  animateNumber($("medallion-count"), member.medallion);
+  animateCount($("crest-count"), member.crests);
+  animateCount($("medallion-count"), member.medallion);
 
   const medallions = earned.filter(a => normalize(a.category) === "MEDALLION");
   const crests = earned.filter(a => normalize(a.category) === "CREST");
   const achievements = earned.filter(a => normalize(a.category) === "ACHIEVEMENT");
 
-  renderAwardList("medallion-list", medallions, "No Medallions recorded.");
-  renderAwardList("crest-list", crests, "No Crests recorded.");
-  renderAwardList("achievement-list", achievements, "No Achievements recorded.");
+  renderAwardList("medallion-list", medallions, "NO MEDALLIONS RECORDED");
+  renderAwardList("crest-list", crests, "NO CRESTS RECORDED");
+  renderAwardList("achievement-list", achievements, "NO ACHIEVEMENTS RECORDED");
 
   const empty = $("awards-empty");
   if(empty) empty.classList.toggle("hidden", earned.length > 0);
@@ -121,10 +140,6 @@ function showMember(member){
     ? state.data.transactions.filter(t => normalize(t.memberId) === normalize(member.id))
     : [];
 
-  const shopSpending = transactions
-    .filter(t => normalize(t.type) === "SHOP PURCHASE")
-    .reduce((sum,t) => sum + Number(t.amount || 0), 0);
-
   $("member-name").textContent = member.name || "—";
   $("member-id-display").textContent = member.id || "—";
   $("member-rank").textContent = member.rank || "—";
@@ -136,7 +151,7 @@ function showMember(member){
   animateNumber($("net-summary"), member.overallNet);
   animateNumber($("earned"), member.monthlyEarned);
   animateNumber($("deductions"), member.deductions);
-  animateNumber($("shop"), member.shopSpending ?? shopSpending);
+  animateNumber($("shop"), member.shopSpending);
 
   renderAwards(member);
 
@@ -217,4 +232,5 @@ loadData().then(renderGuidelines).catch(err => {
   $("lookup-message").textContent = "The portal data could not be loaded. Please try again later.";
   console.error(err);
 });
-      
+
+                                                                  
