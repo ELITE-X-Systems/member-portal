@@ -24,19 +24,42 @@ ded = wb["Deductions"]
 arch = wb["Monthly Archive"]
 awards_sheet = wb["Awards & Achievements"]
 
+ALLOWED_STATUSES = {"ACTIVE", "ON LEAVE", "INACTIVE", "RESIGNED", "REMOVED"}
 ALLOWED_AWARD_CATEGORIES = {"MEDALLION", "CREST", "ACHIEVEMENT"}
 ALLOWED_AWARD_STATUSES = {"EARNED", "PENDING", "REVOKED"}
 
+# Public informational rules. These do not recalculate or alter historical records.
+BOND_GUIDELINES = [
+    {"label": "ATTENDANCE", "value": "2 Bonds", "detail": "Per attendance · Tuesday–Friday"},
+    {"label": "ID INSPECTION", "value": "5 Bonds", "detail": "Per ID check · Monday"},
+    {"label": "GAMES", "value": "50–70 Bonds", "detail": "Maximum per game"},
+    {"label": "ACTIVITIES", "value": "20 Bonds", "detail": "Maximum per person"},
+    {"label": "WEEKLY LIMIT", "value": "100 Bonds", "detail": "Maximum earned per member per week"},
+]
+
+
 def text(value):
     return str(value).strip() if value is not None else ""
+
 
 def iso_date(value):
     if isinstance(value, (datetime, date)):
         return value.strftime("%Y-%m-%d")
     return text(value)
 
+
+def number(value):
+    if value in (None, ""):
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
 members = {}
 
+# Member Registry starts at row 6. Bond Record starts at row 9, so +3.
 for r in range(6, 106):
     mid = text(reg.cell(r, 1).value)
     name = text(reg.cell(r, 2).value)
@@ -44,7 +67,6 @@ for r in range(6, 106):
     if not (mid and name):
         continue
 
-    # Bond Record rows mirror Member Registry rows with a +3 offset.
     br = r + 3
     entries = []
 
@@ -52,71 +74,81 @@ for r in range(6, 106):
         (4, "Week 1", 1), (5, "Week 1", 2),
         (6, "Week 1", 3), (7, "Week 1", 4),
         (8, "Week 2", 1), (9, "Week 2", 2),
-        (10, "Week 2", 3), (11, "Week 2", 4)
+        (10, "Week 2", 3), (11, "Week 2", 4),
     ]:
-        value = bond.cell(br, c).value
-        if value not in (None, 0, ""):
+        value = number(bond.cell(br, c).value)
+        if value is not None and value != 0:
             entries.append({
                 "week": week,
                 "entry": entry,
-                "bonds": float(value)
+                "bonds": value,
             })
 
-    join_date = reg.cell(r, 5).value
+    status = text(reg.cell(r, 4).value).upper()
+    if status not in ALLOWED_STATUSES:
+        status = ""
 
     members[mid] = {
         "id": mid,
         "name": name,
-        "rank": text(reg.cell(r, 3).value) or "Initiate",
-        "status": text(reg.cell(r, 4).value),
-        "joinDate": iso_date(join_date) if join_date else "",
-        "crests": int(float(reg.cell(r, 6).value or 0)),
-        "medallion": int(float(reg.cell(r, 7).value or 0)),
-        # ID status is retained because it is an existing public portal field.
-        "idStatus": text(bond.cell(br, 15).value),
-        "monthlyEarned": float(bond.cell(br, 12).value or 0),
-        "deductions": float(bond.cell(br, 13).value or 0),
-        "overallNet": float(bond.cell(br, 14).value or 0),
-        "weeklyEntries": entries
+        "rank": text(reg.cell(r, 3).value) or "—",
+        "status": status,
+        "joinDate": iso_date(reg.cell(r, 5).value) if reg.cell(r, 5).value else "",
+        # Official award counts come directly from Member Registry.
+        "crests": int(number(reg.cell(r, 6).value) or 0),
+        "medallion": int(number(reg.cell(r, 7).value) or 0),
+        # These values are authoritative calculated values from Bond Record.
+        "monthlyEarned": number(bond.cell(br, 12).value),
+        "deductions": number(bond.cell(br, 13).value),
+        "overallNet": number(bond.cell(br, 14).value),
+        "weeklyEntries": entries,
     }
 
+# Transactions are read directly from Deductions. Shop purchases remain outgoing
+# Bonds and are reported separately from the workbook's authoritative deductions/net.
 transactions = []
+shop_spending = {mid: 0.0 for mid in members}
 
 for r in range(7, 207):
-    mid = text(ded.cell(r, 3).value)
+    mid = text(ded.cell(r, 3).value).upper()
     date_value = ded.cell(r, 2).value
-    typ = text(ded.cell(r, 5).value)
+    typ = text(ded.cell(r, 5).value).upper()
     desc = text(ded.cell(r, 6).value)
-    amount = ded.cell(r, 7).value
+    amount = number(ded.cell(r, 7).value)
 
-    if mid and typ and amount is not None:
-        transactions.append({
-            "memberId": mid,
-            "date": iso_date(date_value),
-            "type": typ,
-            "description": desc,
-            "amount": float(amount)
-        })
+    if not mid or mid not in members or not typ or amount is None:
+        continue
 
+    transactions.append({
+        "memberId": mid,
+        "date": iso_date(date_value),
+        "type": typ,
+        "description": desc,
+        "amount": amount,
+    })
+
+    if typ == "SHOP PURCHASE":
+        shop_spending[mid] = shop_spending.get(mid, 0.0) + amount
+
+for mid, member in members.items():
+    member["shopSpending"] = shop_spending.get(mid, 0.0)
+
+# Monthly Archive contains finalized historical values only.
 monthly = {}
-
 for r in range(6, 106):
-    mid = text(arch.cell(r, 1).value)
-
+    mid = text(arch.cell(r, 1).value).upper()
     if mid and mid in members:
         monthly[mid] = {
-            "September": float(arch.cell(r, 3).value or 0),
-            "October": float(arch.cell(r, 4).value or 0),
-            "November": float(arch.cell(r, 5).value or 0),
-            "December": float(arch.cell(r, 6).value or 0)
+            "September": number(arch.cell(r, 3).value) or 0,
+            "October": number(arch.cell(r, 4).value) or 0,
+            "November": number(arch.cell(r, 5).value) or 0,
+            "December": number(arch.cell(r, 6).value) or 0,
         }
 
-# Only EARNED awards are published to the public portal.
-# Pending/revoked records remain private staff-record information.
+# Only EARNED awards are public. Notes are deliberately excluded.
 awards = []
-
 for r in range(7, 207):
-    mid = text(awards_sheet.cell(r, 3).value)
+    mid = text(awards_sheet.cell(r, 3).value).upper()
     category = text(awards_sheet.cell(r, 5).value).upper()
     name = text(awards_sheet.cell(r, 6).value)
     status = text(awards_sheet.cell(r, 7).value).upper()
@@ -125,14 +157,9 @@ for r in range(7, 207):
 
     if not mid or mid not in members:
         continue
-
     if category not in ALLOWED_AWARD_CATEGORIES:
         continue
-
-    if status not in ALLOWED_AWARD_STATUSES:
-        continue
-
-    if status != "EARNED" or not name:
+    if status not in ALLOWED_AWARD_STATUSES or status != "EARNED" or not name:
         continue
 
     award = {
@@ -140,16 +167,14 @@ for r in range(7, 207):
         "date": iso_date(date_value),
         "category": category,
         "name": name,
-        "status": "EARNED"
+        "status": "EARNED",
     }
-
     if hosted_by:
         award["hostedBy"] = hosted_by
-
     awards.append(award)
 
 out = {
-    "version": "1.1",
+    "version": "1.2",
     "currency": "BONDS 💴",
     "source": "ELITE X Private Staff Records",
     "generatedAt": datetime.now().strftime("%Y-%m-%d"),
@@ -157,11 +182,12 @@ out = {
     "transactions": transactions,
     "awards": awards,
     "monthlyArchive": monthly,
+    "bondGuidelines": BOND_GUIDELINES,
     "activityLog": [],
     "activityMappingNote": (
         "Current Activity Log has no Member ID, so detailed activity-log rows "
-        "are not attributed to members."
-    )
+        "are not attributed to members. Bond Activity uses member-specific Bond Record entries."
+    ),
 }
 
 with open("data.json", "w", encoding="utf-8") as f:
@@ -170,4 +196,4 @@ with open("data.json", "w", encoding="utf-8") as f:
 print("Wrote sanitized data.json")
 print(f"Published members: {len(members)}")
 print(f"Published earned awards: {len(awards)}")
-  
+      
