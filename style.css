@@ -854,7 +854,7 @@ button:focus-visible {
 
 
 
-/* ---------------------------------------------------------
+/*--------------------------------------------------------
    12. DISPLAY-ONLY NOTICE
    --------------------------------------------------------- */
 
@@ -1962,3 +1962,294 @@ html {
   }
     }
   
+
+/* =========================================================
+   ELITE X — RESPONSIVE RECORD BROWSING + STICKY ARCHIVE HEADER
+   Refinement layer. Keeps the existing visual language intact.
+   ========================================================= */
+
+/* Keep the page itself scrollable. Only individual record collections
+   receive an internal scroll once they genuinely become long. */
+body,
+main,
+.shell {
+  overflow-x: hidden;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  margin-inline: -18px;
+  padding-inline: 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(9, 8, 13, 0.88),
+    rgba(9, 8, 13, 0.72)
+  );
+  -webkit-backdrop-filter: blur(12px) saturate(110%);
+  backdrop-filter: blur(12px) saturate(110%);
+  transition:
+    background 260ms ease,
+    box-shadow 260ms ease,
+    border-color 260ms ease;
+}
+
+.site-header.is-scrolled {
+  background: linear-gradient(
+    180deg,
+    rgba(9, 8, 13, 0.985),
+    rgba(9, 8, 13, 0.9)
+  );
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.2),
+    inset 0 -1px 0 rgba(201, 174, 107, 0.06);
+}
+
+/* Independent record windows. These have no fixed height, so short lists
+   still grow naturally. They only become scrollable after reaching the cap. */
+.award-list,
+.activity-list,
+.transaction-list,
+.monthly-list {
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201, 174, 107, 0.28) transparent;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: none;
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+.award-list {
+  max-height: clamp(260px, 38vh, 390px);
+}
+
+.activity-list {
+  max-height: clamp(300px, 42vh, 430px);
+}
+
+.transaction-list {
+  max-height: clamp(280px, 40vh, 420px);
+}
+
+.monthly-list {
+  max-height: clamp(220px, 34vh, 320px);
+}
+
+.award-list::-webkit-scrollbar,
+.activity-list::-webkit-scrollbar,
+.transaction-list::-webkit-scrollbar,
+.monthly-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.award-list::-webkit-scrollbar-track,
+.activity-list::-webkit-scrollbar-track,
+.transaction-list::-webkit-scrollbar-track,
+.monthly-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.award-list::-webkit-scrollbar-thumb,
+.activity-list::-webkit-scrollbar-thumb,
+.transaction-list::-webkit-scrollbar-thumb,
+.monthly-list::-webkit-scrollbar-thumb {
+  background: rgba(201, 174, 107, 0.24);
+  border-radius: 999px;
+  border: 1px solid rgba(9, 8, 13, 0.6);
+}
+
+.award-list::-webkit-scrollbar-thumb:hover,
+.activity-list::-webkit-scrollbar-thumb:hover,
+.transaction-list::-webkit-scrollbar-thumb:hover,
+.monthly-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(225, 207, 155, 0.4);
+}
+
+/* Prevent long award names/descriptions from forcing a wider page. */
+.award-item,
+.activity-row,
+.transaction-row,
+.monthly-row {
+  min-width: 0;
+}
+
+.award-item h5,
+.award-host,
+.activity-name,
+.activity-row .meta,
+.tx-desc,
+.tx-type,
+.monthly-row span {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Slightly stronger interaction on actual record rows, without turning
+   the archive into a gaming interface. */
+.award-item,
+.activity-row,
+.transaction-row,
+.monthly-row,
+.metric,
+.award-count,
+.award-group {
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.award-item:hover,
+.activity-row:hover,
+.transaction-row:hover,
+.monthly-row:hover {
+  border-color: rgba(225, 207, 155, 0.25);
+  background: linear-gradient(145deg, rgba(27, 23, 33, 0.98), rgba(14, 13, 18, 0.98));
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+button {
+  transition:
+    transform 180ms ease,
+    filter 180ms ease,
+    box-shadow 180ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(201, 174, 107, 0.12);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+input {
+  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+input:focus {
+  box-shadow: 0 0 0 3px rgba(201, 174, 107, 0.07);
+  background: #100e14;
+}
+
+/* Keep the mobile composition compact while retaining enough room to browse
+   several records before an internal scrollbar appears. */
+@media (max-width: 700px) {
+  .site-header {
+    margin-inline: -14px;
+    padding-inline: 14px;
+    min-height: 58px;
+  }
+
+  .award-list {
+    max-height: 300px;
+  }
+
+  .activity-list {
+    max-height: 360px;
+  }
+
+  .transaction-list {
+    max-height: 340px;
+  }
+
+  .monthly-list {
+    max-height: 260px;
+  }
+
+  /* Keep the atmospheric X visible inside the viewport rather than letting
+     its decorative layer affect layout dimensions. */
+  .search-panel::after {
+    right: -58px;
+    top: 18px;
+    width: auto;
+    max-width: none;
+    pointer-events: none;
+  }
+
+  .award-item:hover,
+  .activity-row:hover,
+  .transaction-row:hover,
+  .monthly-row:hover,
+  button:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .site-header {
+    margin-inline: -14px;
+  }
+
+  .award-list {
+    max-height: 270px;
+  }
+
+  .activity-list {
+    max-height: 330px;
+  }
+
+  .transaction-list {
+    max-height: 310px;
+  }
+
+  .monthly-list {
+    max-height: 240px;
+  }
+}
+
+@media (max-width: 360px) {
+  .award-list {
+    max-height: 250px;
+  }
+
+  .activity-list {
+    max-height: 300px;
+  }
+
+  .transaction-list {
+    max-height: 285px;
+  }
+
+  .monthly-list {
+    max-height: 220px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  .award-item,
+  .activity-row,
+  .transaction-row,
+  .monthly-row,
+  .metric,
+  .award-count,
+  .award-group,
+  button,
+  input {
+    transition: none !important;
+  }
+
+  .award-list,
+  .activity-list,
+  .transaction-list,
+  .monthly-list {
+    scroll-behavior: auto;
+  }
+}
+
+
+/* Ensure lookup-to-account scrolling leaves room for the compact sticky header. */
+.account { scroll-margin-top: 92px; }
+
+@media (max-width: 700px) {
+  .account { scroll-margin-top: 76px; }
+}
