@@ -1,8 +1,8 @@
 const state = { data: null };
 
 const $ = (id) => document.getElementById(id);
-const money = (n) => Number(n || 0).toLocaleString("en-US", {maximumFractionDigits: 0});
-const count = (n) => String(Math.max(0, Number(n || 0))).padStart(2, "0");
+const money = (n) => Number(n ?? 0).toLocaleString("en-US", { maximumFractionDigits: 0 });
+const count = (n) => String(Math.max(0, Number(n ?? 0))).padStart(2, "0");
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({
   "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
 }[c]));
@@ -11,20 +11,42 @@ const fmtDate = (s) => {
   const d = new Date(`${s}T00:00:00`);
   return Number.isNaN(d.getTime())
     ? esc(s)
-    : d.toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"});
+    : d.toLocaleDateString("en-US", { year:"numeric", month:"short", day:"numeric" });
 };
-
 const normalize = (s) => String(s ?? "").trim().toUpperCase();
+const reducedMotion = () => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
 async function loadData(){
-  const res = await fetch("data.json", {cache:"no-store"});
+  const res = await fetch("data.json", { cache:"no-store" });
   if(!res.ok) throw new Error("Data source unavailable.");
   state.data = await res.json();
 }
 
+function animateNumber(target, value){
+  if(!target) return;
+  const finalValue = Number(value);
+  if(!Number.isFinite(finalValue)){
+    target.textContent = "—";
+    return;
+  }
+  if(reducedMotion()){
+    target.textContent = money(finalValue);
+    return;
+  }
+  const duration = 520;
+  const start = performance.now();
+  const from = 0;
+  const frame = (now) => {
+    const progress = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    target.textContent = money(from + (finalValue - from) * eased);
+    if(progress < 1) requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+}
+
 function renderAwardList(targetId, awards, emptyText){
   const target = $(targetId);
-
   if(!target) return;
 
   if(!awards.length){
@@ -32,8 +54,8 @@ function renderAwardList(targetId, awards, emptyText){
     return;
   }
 
-  target.innerHTML = awards.map(award => `
-    <article class="award-item">
+  target.innerHTML = awards.map((award, index) => `
+    <article class="award-item" style="--award-delay:${Math.min(index, 5) * 55}ms">
       <div class="award-item-top">
         <span class="award-status">EARNED</span>
         <time datetime="${esc(award.date || "")}">${fmtDate(award.date)}</time>
@@ -47,32 +69,51 @@ function renderAwardList(targetId, awards, emptyText){
 function renderAwards(member){
   const allAwards = Array.isArray(state.data?.awards) ? state.data.awards : [];
   const memberId = normalize(member.id);
-
-  /*
-   * The public data generator only publishes EARNED awards.
-   * This second check keeps the UI safe if older/mixed data.json
-   * files contain PENDING or REVOKED records.
-   */
   const earned = allAwards.filter(award =>
-    normalize(award.memberId) === memberId &&
-    normalize(award.status) === "EARNED"
+    normalize(award.memberId) === memberId && normalize(award.status) === "EARNED"
   );
+
+  animateNumber($("crest-count"), member.crests);
+  animateNumber($("medallion-count"), member.medallion);
 
   const medallions = earned.filter(a => normalize(a.category) === "MEDALLION");
   const crests = earned.filter(a => normalize(a.category) === "CREST");
   const achievements = earned.filter(a => normalize(a.category) === "ACHIEVEMENT");
-
-  $("crest-count").textContent = count(member.crests);
-  $("medallion-count").textContent = count(member.medallion);
 
   renderAwardList("medallion-list", medallions, "No Medallions recorded.");
   renderAwardList("crest-list", crests, "No Crests recorded.");
   renderAwardList("achievement-list", achievements, "No Achievements recorded.");
 
   const empty = $("awards-empty");
-  if(empty){
-    empty.classList.toggle("hidden", earned.length > 0);
+  if(empty) empty.classList.toggle("hidden", earned.length > 0);
+}
+
+function renderGuidelines(){
+  const target = $("guidelines-list");
+  const rules = Array.isArray(state.data?.bondGuidelines) ? state.data.bondGuidelines : [];
+  if(!target) return;
+
+  if(!rules.length){
+    target.innerHTML = `<div class="source-note">No Bond earning guidelines are currently published.</div>`;
+    return;
   }
+
+  target.innerHTML = rules.map((rule, index) => `
+    <article class="guideline-card" style="--guide-delay:${Math.min(index, 4) * 45}ms">
+      <span>${esc(rule.label)}</span>
+      <strong>${esc(rule.value)}</strong>
+      <small>${esc(rule.detail)}</small>
+    </article>
+  `).join("");
+}
+
+function setStatusPill(status){
+  const pill = $("member-status-pill");
+  if(!pill) return;
+  const normalized = normalize(status);
+  pill.textContent = status || "—";
+  pill.dataset.status = normalized || "UNKNOWN";
+  pill.setAttribute("aria-label", `Member status: ${status || "Unknown"}`);
 }
 
 function showMember(member){
@@ -80,35 +121,35 @@ function showMember(member){
     ? state.data.transactions.filter(t => normalize(t.memberId) === normalize(member.id))
     : [];
 
-  const deductions = transactions.filter(t => normalize(t.type) === "DEDUCTION");
-  const shop = transactions.filter(t => normalize(t.type) === "SHOP PURCHASE");
-  const shopSpending = shop.reduce((sum,t)=>sum + Number(t.amount||0),0);
+  const shopSpending = transactions
+    .filter(t => normalize(t.type) === "SHOP PURCHASE")
+    .reduce((sum,t) => sum + Number(t.amount || 0), 0);
 
-  $("member-name").textContent = member.name;
-  $("member-id-display").textContent = member.id;
+  $("member-name").textContent = member.name || "—";
+  $("member-id-display").textContent = member.id || "—";
   $("member-rank").textContent = member.rank || "—";
-  $("member-id-status").textContent = member.idStatus || "—";
-  $("member-status").textContent = member.status || "—";
   $("member-join-date").textContent = fmtDate(member.joinDate);
-  $("net-bonds").innerHTML = `${money(member.overallNet)} <small>💴</small>`;
-  $("net-summary").textContent = money(member.overallNet);
-  $("earned").textContent = money(member.monthlyEarned);
-  $("deductions").textContent = money(member.deductions ?? deductions.reduce((s,t)=>s+Number(t.amount||0),0));
-  $("shop").textContent = money(member.shopSpending ?? shopSpending);
+  setStatusPill(member.status);
+
+  const net = Number(member.overallNet);
+  $("net-bonds").innerHTML = `${Number.isFinite(net) ? money(net) : "—"} <small>💴</small>`;
+  animateNumber($("net-summary"), member.overallNet);
+  animateNumber($("earned"), member.monthlyEarned);
+  animateNumber($("deductions"), member.deductions);
+  animateNumber($("shop"), member.shopSpending ?? shopSpending);
 
   renderAwards(member);
 
   const activity = $("activity-list");
-  if(member.weeklyEntries?.length){
-    activity.innerHTML = member.weeklyEntries.map(a => `
-      <div class="activity-row">
+  if(Array.isArray(member.weeklyEntries) && member.weeklyEntries.length){
+    activity.innerHTML = member.weeklyEntries.map((a, index) => `
+      <div class="activity-row" style="--row-delay:${Math.min(index, 7) * 40}ms">
         <div class="activity-name">Bond Entry</div>
         <div class="meta">${esc(a.week)} · Entry #${esc(a.entry)}</div>
         <div class="meta">Recorded earnings</div>
         <div class="amount-positive">+${money(a.bonds)} 💴</div>
       </div>`).join("");
-    $("activity-note").textContent =
-      state.data.activityLog?.length
+    $("activity-note").textContent = state.data?.activityLog?.length
       ? "Member-linked activity details are displayed from the approved activity source."
       : "The current Staff Records Activity Log does not contain a Member ID field, so activity names, dates, and types cannot be safely attributed to individual members. Bond earnings shown above come directly from the member Bond Record.";
   } else {
@@ -118,8 +159,8 @@ function showMember(member){
 
   const txList = $("transaction-list");
   if(transactions.length){
-    txList.innerHTML = transactions.slice().sort((a,b)=>String(b.date).localeCompare(String(a.date))).map(t => `
-      <div class="transaction-row">
+    txList.innerHTML = transactions.slice().sort((a,b) => String(b.date).localeCompare(String(a.date))).map((t, index) => `
+      <div class="transaction-row" style="--row-delay:${Math.min(index, 7) * 40}ms">
         <div class="tx-date">${fmtDate(t.date)}</div>
         <div>
           <div class="tx-type">${esc(t.type)}</div>
@@ -131,20 +172,23 @@ function showMember(member){
     txList.innerHTML = `<div class="source-note">No outgoing Bond transactions are recorded.</div>`;
   }
 
-  const archive = state.data.monthlyArchive?.[member.id] || {};
+  const archive = state.data?.monthlyArchive?.[member.id] || {};
   const months = Object.entries(archive).filter(([,v]) => Number(v) !== 0);
   $("monthly-list").innerHTML = months.length
-    ? months.map(([month,v]) => `<div class="monthly-row"><span>${esc(month)}</span><strong>${money(v)} 💴</strong></div>`).join("")
+    ? months.map(([month,v], index) => `<div class="monthly-row" style="--row-delay:${Math.min(index, 5) * 40}ms"><span>${esc(month)}</span><strong>${money(v)} 💴</strong></div>`).join("")
     : `<div class="source-note">No finalized historical monthly archive entries are currently recorded.</div>`;
 
-  $("account").classList.remove("hidden");
-  $("account").scrollIntoView({behavior:"smooth",block:"start"});
+  const account = $("account");
+  account.classList.remove("hidden");
+  account.classList.remove("account-reveal");
+  void account.offsetWidth;
+  account.classList.add("account-reveal");
+  account.scrollIntoView({ behavior: reducedMotion() ? "auto" : "smooth", block:"start" });
 }
 
 $("lookup-form").addEventListener("submit", e => {
   e.preventDefault();
-
-  const id = $("member-id").value.trim().toUpperCase();
+  const id = normalize($("member-id").value);
   const member = state.data?.members?.find(m => normalize(m.id) === id);
 
   if(!member){
@@ -157,7 +201,20 @@ $("lookup-form").addEventListener("submit", e => {
   showMember(member);
 });
 
-loadData().catch(err => {
+const header = $("site-header");
+let ticking = false;
+window.addEventListener("scroll", () => {
+  if(ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    header?.classList.toggle("is-scrolled", window.scrollY > 12);
+    ticking = false;
+  });
+}, { passive:true });
+
+renderGuidelines();
+loadData().then(renderGuidelines).catch(err => {
   $("lookup-message").textContent = "The portal data could not be loaded. Please try again later.";
   console.error(err);
 });
+      
