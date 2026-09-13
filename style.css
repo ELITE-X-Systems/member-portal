@@ -1648,3 +1648,317 @@ html {
   }
   }
   
+
+/* =========================================================
+   ELITE X — FINAL POLISH / RESPONSIVE REPAIR
+   Keeps the existing visual language and only refines it.
+   ========================================================= */
+
+/* Repair the existing refinement layer's stray closing brace and
+   keep decorative layers from ever becoming interactive. */
+.site-header,
+.lookup,
+.account-card,
+.metric,
+.award-group,
+.activity-row,
+.transaction-row,
+.monthly-row,
+.guideline-card {
+  isolation: isolate;
+}
+
+.site-header.is-scrolled {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(9, 8, 13, 0.995),
+      rgba(9, 8, 13, 0.92)
+    );
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.18),
+    inset 0 -1px 0 rgba(201, 174, 107, 0.045);
+}
+
+/* Give the decorative X its own stacking layer so it remains
+   visible on narrow screens without sitting above the content. */
+.search-panel::after {
+  z-index: 0;
+  color: rgba(141, 104, 182, 0.045);
+  opacity: 0.9;
+  animation: eliteXMonogramDrift 20s ease-in-out infinite alternate;
+}
+
+.search-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.account-reveal {
+  animation: eliteXAccountReveal 520ms cubic-bezier(.22,.61,.36,1) both;
+}
+
+/* Status remains a single source of visual truth in the account header. */
+.status-pill {
+  min-width: 78px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.status-pill[data-status="ACTIVE"] {
+  border-color: rgba(201, 174, 107, 0.5);
+  color: var(--gold-soft);
+}
+
+.status-pill[data-status="ON LEAVE"] {
+  border-color: rgba(225, 207, 155, 0.34);
+  color: #d7cdb9;
+}
+
+.status-pill[data-status="INACTIVE"],
+.status-pill[data-status="RESIGNED"],
+.status-pill[data-status="REMOVED"] {
+  border-color: rgba(213, 161, 161, 0.35);
+  color: #d8b2b2;
+}
+
+/* Gentle archival numbering/detail without adding fake content. */
+.account-card::before,
+.lookup::before,
+.section-heading::after {
+  pointer-events: none;
+}
+
+/* Compact informational Bond guidelines. */
+.guidelines-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.guideline-card {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background:
+    linear-gradient(145deg, rgba(23,20,28,.92), rgba(15,14,19,.96));
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background 220ms ease;
+  animation: eliteXRowReveal 440ms var(--guide-delay, 0ms) cubic-bezier(.22,.61,.36,1) both;
+}
+
+.guideline-card::after {
+  content: "";
+  position: absolute;
+  right: -18px;
+  bottom: -18px;
+  width: 54px;
+  height: 54px;
+  border: 1px solid rgba(201,174,107,.055);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.guideline-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(225,207,155,.25);
+  box-shadow: 0 10px 25px rgba(0,0,0,.14);
+}
+
+.guideline-card span,
+.guideline-card small {
+  display: block;
+  color: var(--muted);
+  font-size: .55rem;
+  letter-spacing: .12em;
+  line-height: 1.45;
+}
+
+.guideline-card strong {
+  display: block;
+  margin: 8px 0 5px;
+  color: var(--gold-soft);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.guideline-card small {
+  letter-spacing: .02em;
+  text-transform: none;
+}
+
+/* Entry cards reveal gently when an account is loaded. */
+.activity-row,
+.transaction-row,
+.monthly-row {
+  animation: eliteXRowReveal 420ms var(--row-delay, 0ms) cubic-bezier(.22,.61,.36,1) both;
+}
+
+.award-item {
+  animation: eliteXRowReveal 420ms var(--award-delay, 0ms) cubic-bezier(.22,.61,.36,1) both;
+}
+
+@keyframes eliteXRowReveal {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes eliteXMonogramDrift {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-8deg);
+  }
+  100% {
+    transform: translate3d(-10px, 8px, 0) rotate(-5deg);
+  }
+}
+
+/* Tablet: let the five compact guideline cards breathe. */
+@media (max-width: 1000px) and (min-width: 701px) {
+  .guidelines-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile: keep the same composition, but remove narrow desktop grids. */
+@media (max-width: 700px) {
+  html {
+    scroll-padding-top: 72px;
+  }
+
+  .site-header {
+    min-height: 58px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+  }
+
+  .brand-mark {
+    flex: 0 0 auto;
+  }
+
+  .search-panel {
+    overflow: visible;
+  }
+
+  .search-panel::after {
+    top: 22px;
+    right: -72px;
+    font-size: 13.5rem;
+    color: rgba(141,104,182,.05);
+    opacity: 1;
+  }
+
+  .lookup-row {
+    width: 100%;
+  }
+
+  input,
+  button {
+    min-width: 0;
+  }
+
+  .account-top h2 {
+    max-width: calc(100vw - 70px);
+  }
+
+  .identity-grid {
+    margin-top: 24px;
+  }
+
+  .balance-value {
+    font-size: clamp(2.8rem, 14vw, 3.5rem);
+  }
+
+  .guidelines-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .guideline-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .guideline-card {
+    padding: 12px;
+  }
+
+  .guideline-card strong {
+    font-size: 1.18rem;
+  }
+
+  .metric strong {
+    max-width: 100%;
+  }
+
+  .award-item,
+  .guideline-card,
+  .activity-row,
+  .transaction-row,
+  .monthly-row {
+    animation-duration: 360ms;
+  }
+
+  .award-item:hover,
+  .guideline-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 390px) {
+  .brand-mark {
+    width: 42px;
+    height: 42px;
+  }
+
+  .brand h1 {
+    font-size: 1.7rem;
+  }
+
+  .search-panel::after {
+    right: -66px;
+    font-size: 12rem;
+  }
+
+  .guidelines-list {
+    gap: 7px;
+  }
+
+  .guideline-card {
+    padding: 11px;
+  }
+
+  .guideline-card strong {
+    font-size: 1.08rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .search-panel::after,
+  .guideline-card,
+  .activity-row,
+  .transaction-row,
+  .monthly-row,
+  .award-item,
+  .account-reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+    }
+  
