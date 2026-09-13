@@ -10,7 +10,7 @@
 </head>
 <body>
   <div class="shell">
-    <header class="site-header">
+    <header class="site-header" id="site-header">
       <div class="brand">
         <img src="assets/elite-x-logo.jpg" alt="ELITE X emblem" class="brand-mark">
         <div>
@@ -33,7 +33,7 @@
             <input id="member-id" name="member-id" inputmode="text" autocomplete="off" placeholder="ELX-001" maxlength="20" required>
             <button type="submit">VIEW ACCOUNT</button>
           </div>
-          <div id="lookup-message" class="lookup-message" role="status"></div>
+          <div id="lookup-message" class="lookup-message" role="status" aria-live="polite"></div>
         </form>
       </section>
 
@@ -45,19 +45,17 @@
               <h2 id="member-name">—</h2>
               <div class="member-id-line" id="member-id-display">—</div>
             </div>
-            <div class="status-pill" id="member-status">—</div>
+            <div class="status-pill" id="member-status-pill" aria-label="Member status">—</div>
           </div>
 
           <div class="identity-grid">
             <div><span>RANK</span><strong id="member-rank">—</strong></div>
-            <div><span>ID STATUS</span><strong id="member-id-status">—</strong></div>
-            <div><span>MEMBER STATUS</span><strong id="member-status">—</strong></div>
             <div><span>JOIN DATE</span><strong id="member-join-date">—</strong></div>
           </div>
 
           <div class="balance">
             <div class="balance-label">AVAILABLE / NET BONDS</div>
-            <div class="balance-value" id="net-bonds">0 <small>💴</small></div>
+            <div class="balance-value" id="net-bonds">— <small>💴</small></div>
           </div>
         </div>
 
@@ -71,21 +69,32 @@
           <div class="summary-grid">
             <article class="metric">
               <span>CURRENT MONTH EARNED</span>
-              <strong id="earned">0</strong><em>💴</em>
+              <strong id="earned">—</strong><em>💴</em>
             </article>
             <article class="metric">
               <span>DEDUCTIONS</span>
-              <strong id="deductions">0</strong><em>💴</em>
+              <strong id="deductions">—</strong><em>💴</em>
             </article>
             <article class="metric">
               <span>SHOP SPENDING</span>
-              <strong id="shop">0</strong><em>💴</em>
+              <strong id="shop">—</strong><em>💴</em>
             </article>
             <article class="metric metric-net">
               <span>NET BONDS</span>
-              <strong id="net-summary">0</strong><em>💴</em>
+              <strong id="net-summary">—</strong><em>💴</em>
             </article>
           </div>
+        </section>
+
+        <section class="section guidelines-section" aria-labelledby="guidelines-title">
+          <div class="section-heading">
+            <div>
+              <div class="section-kicker">REFERENCE</div>
+              <h3 id="guidelines-title">Bond Earning Guidelines</h3>
+            </div>
+          </div>
+          <div id="guidelines-list" class="guidelines-list"></div>
+          <p class="source-note">Guidelines are informational only. Historical Bond records are not recalculated from these limits.</p>
         </section>
 
         <section class="section awards-section" aria-labelledby="awards-title">
@@ -107,9 +116,7 @@
             </article>
           </div>
 
-          <div id="awards-empty" class="awards-empty hidden" role="status">
-            NO AWARDS RECORDED
-          </div>
+          <div id="awards-empty" class="awards-empty hidden" role="status">NO AWARDS RECORDED</div>
 
           <div class="awards-groups">
             <section class="award-group award-group-medallion" aria-labelledby="medallions-title">
@@ -192,5 +199,5 @@
   </div>
   <script src="script.js"></script>
 </body>
-  </html>
-          
+                                                                                               </html>
+                                                                                               
