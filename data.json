@@ -57,16 +57,52 @@
     {
       "id": "ELX-002",
       "name": "Member #2",
-      "rank": "Vestige",
+      "rank": "Vassal",
       "status": "REMOVED",
       "joinDate": "2026-09-11",
       "crests": 0,
       "medallion": 0,
-      "monthlyEarned": 0,
+      "monthlyEarned": 360,
       "deductions": 0,
-      "overallNet": 0,
-      "shopSpending": 0,
-      "weeklyEntries": []
+      "overallNet": 360,
+      "shopSpending": 30,
+      "weeklyEntries": [
+        {
+          "week": "Week 1",
+          "entry": 1,
+          "bonds": 80
+        },
+        {
+          "week": "Week 1",
+          "entry": 2,
+          "bonds": 20
+        },
+        {
+          "week": "Week 1",
+          "entry": 3,
+          "bonds": 90
+        },
+        {
+          "week": "Week 1",
+          "entry": 4,
+          "bonds": 60
+        },
+        {
+          "week": "Week 2",
+          "entry": 1,
+          "bonds": 40
+        },
+        {
+          "week": "Week 2",
+          "entry": 2,
+          "bonds": 40
+        },
+        {
+          "week": "Week 2",
+          "entry": 3,
+          "bonds": 30
+        }
+      ]
     }
   ],
   "transactions": [
@@ -83,6 +119,20 @@
       "type": "SHOP PURCHASE",
       "description": "Item #",
       "amount": 28
+    },
+    {
+      "memberId": "ELX-002",
+      "date": "",
+      "type": "SHOP PURCHASE",
+      "description": "womo",
+      "amount": 30
+    },
+    {
+      "memberId": "ELX-002",
+      "date": "",
+      "type": "DEDUCTION",
+      "description": "jjsjsjs",
+      "amount": 10
     }
   ],
   "awards": [
