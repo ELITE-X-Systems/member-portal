@@ -6,7 +6,7 @@
   "members": [
     {
       "id": "ELX-001",
-      "name": "Member",
+      "name": "Izumi",
       "rank": "Vassal",
       "status": "ACTIVE",
       "joinDate": "2026-09-12",
@@ -58,7 +58,7 @@
       "id": "ELX-002",
       "name": "Member #2",
       "rank": "Vassal",
-      "status": "REMOVED",
+      "status": "ON LEAVE",
       "joinDate": "2026-09-11",
       "crests": 0,
       "medallion": 0,
@@ -103,6 +103,20 @@
           "bonds": 30
         }
       ]
+    },
+    {
+      "id": "ELX-003",
+      "name": "Member test",
+      "rank": "Vestige",
+      "status": "ACTIVE",
+      "joinDate": "",
+      "crests": 0,
+      "medallion": 0,
+      "monthlyEarned": 0,
+      "deductions": 0,
+      "overallNet": 0,
+      "shopSpending": 0,
+      "weeklyEntries": []
     }
   ],
   "transactions": [
@@ -169,6 +183,12 @@
       "December": 0
     },
     "ELX-002": {
+      "September": 0,
+      "October": 0,
+      "November": 0,
+      "December": 0
+    },
+    "ELX-003": {
       "September": 0,
       "October": 0,
       "November": 0,
