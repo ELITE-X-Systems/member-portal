@@ -7,30 +7,42 @@
     {
       "id": "ELX-001",
       "name": "Izumi",
-      "rank": "Initiate",
+      "rank": "Vestige",
       "status": "ACTIVE",
       "joinDate": "2026-09-12",
       "crests": 0,
       "medallion": 0,
-      "monthlyEarned": 0,
+      "monthlyEarned": 100,
       "deductions": 10,
-      "overallNet": -10,
+      "overallNet": 90,
       "shopSpending": 28,
-      "weeklyEntries": []
+      "weeklyEntries": [
+        {
+          "week": "Week 1",
+          "entry": 1,
+          "bonds": 100
+        }
+      ]
     },
     {
       "id": "ELX-002",
       "name": "Member #2",
-      "rank": "Vestige",
+      "rank": "Cipher",
       "status": "ON LEAVE",
       "joinDate": "2026-09-11",
       "crests": 0,
       "medallion": 0,
-      "monthlyEarned": 0,
+      "monthlyEarned": 500,
       "deductions": 0,
-      "overallNet": 0,
+      "overallNet": 500,
       "shopSpending": 30,
-      "weeklyEntries": []
+      "weeklyEntries": [
+        {
+          "week": "Week 1",
+          "entry": 1,
+          "bonds": 500
+        }
+      ]
     },
     {
       "id": "ELX-003",
@@ -40,11 +52,17 @@
       "joinDate": "",
       "crests": 0,
       "medallion": 0,
-      "monthlyEarned": 0,
+      "monthlyEarned": 99,
       "deductions": 0,
-      "overallNet": 0,
+      "overallNet": 99,
       "shopSpending": 0,
-      "weeklyEntries": []
+      "weeklyEntries": [
+        {
+          "week": "Week 1",
+          "entry": 1,
+          "bonds": 99
+        }
+      ]
     }
   ],
   "transactions": [
