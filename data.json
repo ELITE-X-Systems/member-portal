@@ -7,102 +7,30 @@
     {
       "id": "ELX-001",
       "name": "Izumi",
-      "rank": "Vassal",
+      "rank": "Initiate",
       "status": "ACTIVE",
       "joinDate": "2026-09-12",
       "crests": 0,
       "medallion": 0,
-      "monthlyEarned": 400,
+      "monthlyEarned": 0,
       "deductions": 10,
-      "overallNet": 390,
+      "overallNet": -10,
       "shopSpending": 28,
-      "weeklyEntries": [
-        {
-          "week": "Week 1",
-          "entry": 1,
-          "bonds": 60
-        },
-        {
-          "week": "Week 1",
-          "entry": 2,
-          "bonds": 80
-        },
-        {
-          "week": "Week 1",
-          "entry": 3,
-          "bonds": 90
-        },
-        {
-          "week": "Week 1",
-          "entry": 4,
-          "bonds": 30
-        },
-        {
-          "week": "Week 2",
-          "entry": 1,
-          "bonds": 50
-        },
-        {
-          "week": "Week 2",
-          "entry": 2,
-          "bonds": 30
-        },
-        {
-          "week": "Week 2",
-          "entry": 3,
-          "bonds": 60
-        }
-      ]
+      "weeklyEntries": []
     },
     {
       "id": "ELX-002",
       "name": "Member #2",
-      "rank": "Vassal",
+      "rank": "Vestige",
       "status": "ON LEAVE",
       "joinDate": "2026-09-11",
       "crests": 0,
       "medallion": 0,
-      "monthlyEarned": 360,
+      "monthlyEarned": 0,
       "deductions": 0,
-      "overallNet": 360,
+      "overallNet": 0,
       "shopSpending": 30,
-      "weeklyEntries": [
-        {
-          "week": "Week 1",
-          "entry": 1,
-          "bonds": 80
-        },
-        {
-          "week": "Week 1",
-          "entry": 2,
-          "bonds": 20
-        },
-        {
-          "week": "Week 1",
-          "entry": 3,
-          "bonds": 90
-        },
-        {
-          "week": "Week 1",
-          "entry": 4,
-          "bonds": 60
-        },
-        {
-          "week": "Week 2",
-          "entry": 1,
-          "bonds": 40
-        },
-        {
-          "week": "Week 2",
-          "entry": 2,
-          "bonds": 40
-        },
-        {
-          "week": "Week 2",
-          "entry": 3,
-          "bonds": 30
-        }
-      ]
+      "weeklyEntries": []
     },
     {
       "id": "ELX-003",
