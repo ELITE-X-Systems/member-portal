@@ -7,11 +7,11 @@
     {
       "id": "ELX-001",
       "name": "YUKARI",
-      "rank": "Vassal",
+      "rank": "Vestige",
       "status": "RESIGNED",
       "monthlyEarned": 307,
-      "deductions": 0,
-      "overallNet": 307,
+      "deductions": 120,
+      "overallNet": 187,
       "weeklyEntries": [
         {
           "week": "Week 1",
@@ -178,8 +178,8 @@
       "rank": "Vassal",
       "status": "REMOVED",
       "monthlyEarned": 256,
-      "deductions": 0,
-      "overallNet": 256,
+      "deductions": 10,
+      "overallNet": 246,
       "weeklyEntries": [
         {
           "week": "Week 1",
@@ -848,42 +848,42 @@
   "transactions": [
     {
       "memberId": "ELX-001",
-      "date": "",
+      "date": "2026-09-18",
       "type": "DEDUCTION",
       "description": "T",
       "amount": 10
     },
     {
       "memberId": "ELX-001",
-      "date": "",
+      "date": "2026-09-18",
       "type": "DEDUCTION",
       "description": "E",
       "amount": 10
     },
     {
       "memberId": "ELX-001",
-      "date": "",
+      "date": "2026-09-18",
       "type": "SHOP PURCHASE",
       "description": "S",
       "amount": 50
     },
     {
       "memberId": "ELX-001",
-      "date": "",
+      "date": "2026-09-18",
       "type": "SHOP PURCHASE",
       "description": "T",
       "amount": 40
     },
     {
       "memberId": "ELX-002",
-      "date": "",
+      "date": "2026-09-18",
       "type": "SHOP PURCHASE",
       "description": "UH",
       "amount": 10
     },
     {
       "memberId": "ELX-001",
-      "date": "",
+      "date": "2026-09-18",
       "type": "SHOP PURCHASE",
       "description": ":3",
       "amount": 10
