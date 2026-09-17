@@ -1,12 +1,491 @@
 {
-  "version": "1.3",
+  "version": "2.0",
   "currency": "BONDS 💴",
   "source": "ELITE X Private Staff Records",
   "generatedAt": "2026-09-17",
-  "members": [],
-  "transactions": [],
-  "awards": [],
-  "monthlyArchive": {},
+  "members": [
+    {
+      "id": "ELX-001",
+      "name": "Izumi",
+      "rank": "Initiate",
+      "status": "ACTIVE",
+      "joinDate": "2026-09-12",
+      "crests": 0,
+      "medallion": 0,
+      "monthlyEarned": 0,
+      "deductions": 10,
+      "overallNet": -10,
+      "shopSpending": 28,
+      "weeklyEntries": [],
+      "attendance": {
+        "weeks": [
+          {
+            "week": "Week 1",
+            "presentDays": 2,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "ID CHECK",
+                "present": true
+              },
+              {
+                "label": "TUE",
+                "present": true
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 2",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "ID CHECK",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 3",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "ID CHECK",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 4",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "ID CHECK",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          }
+        ],
+        "perfectWeeks": 0,
+        "totalWeeks": 4,
+        "perfectChronicle": false,
+        "bonus": 7,
+        "presentDays": 2,
+        "requiredDays": 20
+      }
+    },
+    {
+      "id": "ELX-002",
+      "name": "Member #2",
+      "rank": "Vestige",
+      "status": "ON LEAVE",
+      "joinDate": "2026-09-11",
+      "crests": 0,
+      "medallion": 0,
+      "monthlyEarned": 0,
+      "deductions": 0,
+      "overallNet": 0,
+      "shopSpending": 30,
+      "weeklyEntries": [],
+      "attendance": {
+        "weeks": [
+          {
+            "week": "Week 1",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "ID CHECK",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 2",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "ID CHECK",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 3",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "ID CHECK",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 4",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "ID CHECK",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          }
+        ],
+        "perfectWeeks": 0,
+        "totalWeeks": 4,
+        "perfectChronicle": false,
+        "bonus": 0,
+        "presentDays": 0,
+        "requiredDays": 20
+      }
+    },
+    {
+      "id": "ELX-003",
+      "name": "Member test",
+      "rank": "Vestige",
+      "status": "ACTIVE",
+      "joinDate": "",
+      "crests": 0,
+      "medallion": 0,
+      "monthlyEarned": 0,
+      "deductions": 0,
+      "overallNet": 0,
+      "shopSpending": 0,
+      "weeklyEntries": [],
+      "attendance": {
+        "weeks": [
+          {
+            "week": "Week 1",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "ID CHECK",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 2",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "ID CHECK",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 3",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "ID CHECK",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 4",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "ID CHECK",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          }
+        ],
+        "perfectWeeks": 0,
+        "totalWeeks": 4,
+        "perfectChronicle": false,
+        "bonus": 0,
+        "presentDays": 0,
+        "requiredDays": 20
+      }
+    }
+  ],
+  "transactions": [
+    {
+      "memberId": "ELX-001",
+      "date": "2026-09-12",
+      "type": "DEDUCTION",
+      "description": "Rule # Violation",
+      "amount": 10
+    },
+    {
+      "memberId": "ELX-001",
+      "date": "",
+      "type": "SHOP PURCHASE",
+      "description": "Item #",
+      "amount": 28
+    },
+    {
+      "memberId": "ELX-002",
+      "date": "",
+      "type": "SHOP PURCHASE",
+      "description": "womo",
+      "amount": 30
+    },
+    {
+      "memberId": "ELX-002",
+      "date": "",
+      "type": "DEDUCTION",
+      "description": "jjsjsjs",
+      "amount": 10
+    }
+  ],
+  "awards": [
+    {
+      "memberId": "ELX-001",
+      "date": "2026-09-12",
+      "category": "ACHIEVEMENT",
+      "name": "AWARD NAME",
+      "status": "EARNED"
+    },
+    {
+      "memberId": "ELX-001",
+      "date": "",
+      "category": "ACHIEVEMENT",
+      "name": "name",
+      "status": "EARNED"
+    },
+    {
+      "memberId": "ELX-001",
+      "date": "",
+      "category": "ACHIEVEMENT",
+      "name": ".",
+      "status": "EARNED"
+    }
+  ],
+  "monthlyArchive": {
+    "ELX-001": {
+      "September": null,
+      "October": null,
+      "November": null,
+      "December": null
+    },
+    "ELX-002": {
+      "September": null,
+      "October": null,
+      "November": null,
+      "December": null
+    },
+    "ELX-003": {
+      "September": null,
+      "October": null,
+      "November": null,
+      "December": null
+    }
+  },
   "bondGuidelines": [
     {
       "label": "ATTENDANCE",
@@ -19,14 +498,19 @@
       "detail": "Per ID check · Monday"
     },
     {
-      "label": "GAMES",
-      "value": "50–70 Bonds",
-      "detail": "Maximum per game"
+      "label": "GAMBIT",
+      "value": "+5–10 Bonds",
+      "detail": "Maximum 30 per chronicle"
     },
     {
-      "label": "ACTIVITIES",
-      "value": "20 Bonds",
-      "detail": "Maximum per person"
+      "label": "CONQUEST",
+      "value": "+15–20 Bonds",
+      "detail": "Maximum 50 per chronicle"
+    },
+    {
+      "label": "COMMISSION",
+      "value": "+20–30 Bonds",
+      "detail": "Maximum 50 per chronicle"
     },
     {
       "label": "WEEKLY LIMIT",
@@ -34,6 +518,6 @@
       "detail": "Maximum earned per member per week"
     }
   ],
-  "activityLog": [],
-  "activityMappingNote": "Current Activity Log has no Member ID, so detailed activity-log rows are not attributed to members. Bond Activity uses member-specific Bond Record entries."
-}
+  "activityLog": {}
+              }
+                
