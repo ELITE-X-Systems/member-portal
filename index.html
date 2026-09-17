@@ -4,201 +4,112 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0b0a10">
-  <meta name="description" content="ELITE X public Bond Account portal.">
-  <title>ELITE X · Bond Account</title>
+  <meta name="description" content="ELITE X official public member portal and chronicle archive.">
+  <title>ELITE X · Member Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
   <div class="shell">
     <header class="site-header" id="site-header">
-      <div class="brand">
+      <a class="brand" href="#top" aria-label="ELITE X home">
         <img src="assets/elite-x-logo.jpg" alt="ELITE X emblem" class="brand-mark">
-        <div>
-          <div class="eyebrow">THE ELITE COURT</div>
-          <h1>ELITE X</h1>
-          <p>PUBLIC MEMBER PORTAL</p>
-        </div>
-      </div>
-      <div class="header-note">BONDS <span>💴</span></div>
+        <span class="brand-copy"><span class="eyebrow">THE ELITE COURT</span><strong>ELITE X</strong><span>MEMBER PORTAL</span></span>
+      </a>
+      <div class="header-mark">BONDS <span>💴</span></div>
     </header>
 
-    <main>
-      <section class="search-panel" aria-labelledby="portal-title">
-        <div class="section-kicker">MEMBER ACCESS</div>
-        <h2 id="portal-title">View your Bond Account</h2>
-        <p class="muted">Enter your official Member ID. Your ID is the primary account identifier.</p>
-        <form id="lookup-form" class="lookup">
+    <main id="top">
+      <section class="hero" aria-labelledby="portal-title">
+        <div class="hero-ornament" aria-hidden="true">✦</div>
+        <div class="section-kicker">OFFICIAL MEMBER ARCHIVE</div>
+        <h1 id="portal-title">ELITE X</h1>
+        <p class="hero-title">MEMBER PORTAL</p>
+        <p class="hero-copy">Enter an official Member ID to view its approved public record, Bond standing, honours, and chronicles.</p>
+        <form id="lookup-form" class="lookup" novalidate>
           <label for="member-id">MEMBER ID</label>
           <div class="lookup-row">
-            <input id="member-id" name="member-id" inputmode="text" autocomplete="off" placeholder="ELX-001" maxlength="20" required>
-            <button type="submit">VIEW ACCOUNT</button>
+            <input id="member-id" name="member-id" inputmode="text" autocomplete="off" placeholder="ELX-001" maxlength="20" required aria-describedby="lookup-message">
+            <button type="submit">VIEW RECORD <span>↗</span></button>
           </div>
           <div id="lookup-message" class="lookup-message" role="status" aria-live="polite"></div>
         </form>
+        <div class="hero-rule" aria-hidden="true"><span></span><i>✦</i><span></span></div>
       </section>
 
       <section id="account" class="account hidden" aria-live="polite">
-        <div class="account-card">
-          <div class="account-top">
-            <div>
-              <div class="section-kicker">ELITE X · BOND ACCOUNT</div>
-              <h2 id="member-name">—</h2>
-              <div class="member-id-line" id="member-id-display">—</div>
-            </div>
-            <div class="status-pill" id="member-status-pill" aria-label="Member status">—</div>
+        <div class="profile-panel">
+          <div class="profile-main">
+            <div class="section-kicker">MEMBER PROFILE</div>
+            <div class="profile-name-row"><h2 id="member-name">—</h2><span class="status-pill" id="member-status-pill">—</span></div>
+            <div class="member-id-line">MEMBER ID <strong id="member-id-display">—</strong></div>
           </div>
-
-          <div class="identity-grid">
+          <div class="profile-meta">
             <div><span>RANK</span><strong id="member-rank">—</strong></div>
-            <div><span>JOIN DATE</span><strong id="member-join-date">—</strong></div>
-          </div>
-
-          <div class="balance">
-            <div class="balance-label">AVAILABLE / NET BONDS</div>
-            <div class="balance-value" id="net-bonds">— <small>💴</small></div>
+            <div><span>JOINED</span><strong id="member-join-date">—</strong></div>
           </div>
         </div>
 
-        <section class="section">
-          <div class="section-heading">
-            <div>
-              <div class="section-kicker">ACCOUNT SUMMARY</div>
-              <h3>Bond Overview</h3>
-            </div>
-          </div>
+        <section class="section summary-section" aria-labelledby="summary-title">
+          <div class="section-heading"><div><div class="section-kicker">BOND SUMMARY</div><h3 id="summary-title">Current Standing</h3></div></div>
           <div class="summary-grid">
-            <article class="metric">
-              <span>CURRENT MONTH EARNED</span>
-              <strong id="earned">—</strong><em>💴</em>
-            </article>
-            <article class="metric">
-              <span>DEDUCTIONS</span>
-              <strong id="deductions">—</strong><em>💴</em>
-            </article>
-            <article class="metric">
-              <span>SHOP SPENDING</span>
-              <strong id="shop">—</strong><em>💴</em>
-            </article>
-            <article class="metric metric-net">
-              <span>NET BONDS</span>
-              <strong id="net-summary">—</strong><em>💴</em>
-            </article>
+            <article class="metric metric-primary"><span>MONTHLY EARNED</span><strong id="earned">—</strong><em>💴</em></article>
+            <article class="metric metric-primary"><span>OVERALL NET</span><strong id="net-summary">—</strong><em>💴</em></article>
+            <article class="metric"><span>DEDUCTIONS</span><strong id="deductions">—</strong><em>💴</em></article>
           </div>
         </section>
 
-        <section class="section guidelines-section" aria-labelledby="guidelines-title">
-          <div class="section-heading">
-            <div>
-              <div class="section-kicker">REFERENCE</div>
-              <h3 id="guidelines-title">Bond Earning Guidelines</h3>
-            </div>
-          </div>
-          <div id="guidelines-list" class="guidelines-list"></div>
-          <p class="source-note">Guidelines are informational only. Historical Bond records are not recalculated from these limits.</p>
+        <section class="section earnings-section" aria-labelledby="earnings-title">
+          <div class="section-heading"><div><div class="section-kicker">RECORDED EARNINGS</div><h3 id="earnings-title">Bond Record</h3></div><span class="source-badge">STAFF RECORD</span></div>
+          <div id="earnings-list" class="earnings-list"></div>
+        </section>
+
+        <section class="section attendance-section" aria-labelledby="attendance-title">
+          <div class="section-heading"><div><div class="section-kicker">ATTENDANCE</div><h3 id="attendance-title">Chronicle Attendance</h3></div></div>
+          <div id="attendance-overview" class="attendance-overview"></div>
+          <div id="attendance-days" class="attendance-days"></div>
+          <div class="attendance-bonus"><div><span>ATTENDANCE BONUSES</span><small>Weekly + Chronicle bonuses recorded for this chronicle</small></div><strong id="attendance-bonus-value">+0 💴</strong></div>
         </section>
 
         <section class="section awards-section" aria-labelledby="awards-title">
-          <div class="section-heading">
-            <div>
-              <div class="section-kicker">ELITE X HONOURS</div>
-              <h3 id="awards-title">Awards &amp; Achievements</h3>
-            </div>
+          <div class="section-heading"><div><div class="section-kicker">ELITE X HONOURS</div><h3 id="awards-title">Awards &amp; Achievements</h3></div></div>
+          <div class="awards-summary">
+            <article><span>MEDALLIONS</span><strong id="medallion-count">00</strong></article>
+            <article><span>CRESTS</span><strong id="crest-count">00</strong></article>
           </div>
-
-          <div class="awards-summary" aria-label="Award totals">
-            <article class="award-count award-count-crest">
-              <span>CRESTS</span>
-              <strong id="crest-count">00</strong>
-            </article>
-            <article class="award-count award-count-medallion">
-              <span>MEDALLIONS</span>
-              <strong id="medallion-count">00</strong>
-            </article>
-          </div>
-
-          <div id="awards-empty" class="awards-empty hidden" role="status">NO AWARDS RECORDED</div>
-
           <div class="awards-groups">
-            <section class="award-group award-group-medallion" aria-labelledby="medallions-title">
-              <div class="award-group-heading">
-                <span class="award-mark award-mark-medallion" aria-hidden="true"></span>
-                <div>
-                  <div class="section-kicker">MEDALLION</div>
-                  <h4 id="medallions-title">Medallions</h4>
-                </div>
-              </div>
-              <div id="medallion-list" class="award-list"></div>
-            </section>
-
-            <section class="award-group award-group-crest" aria-labelledby="crests-title">
-              <div class="award-group-heading">
-                <span class="award-mark award-mark-crest" aria-hidden="true"></span>
-                <div>
-                  <div class="section-kicker">CREST</div>
-                  <h4 id="crests-title">Crests</h4>
-                </div>
-              </div>
-              <div id="crest-list" class="award-list"></div>
-            </section>
-
-            <section class="award-group award-group-achievement" aria-labelledby="achievements-title">
-              <div class="award-group-heading">
-                <span class="award-mark award-mark-achievement" aria-hidden="true"></span>
-                <div>
-                  <div class="section-kicker">RECOGNITION</div>
-                  <h4 id="achievements-title">Achievements</h4>
-                </div>
-              </div>
-              <div id="achievement-list" class="award-list"></div>
-            </section>
+            <section class="award-group"><div class="award-group-heading"><span class="award-mark medallion-mark">✦</span><div><span class="section-kicker">MEDALLIONS</span><h4>Medallions</h4></div></div><div id="medallion-list" class="award-list"></div></section>
+            <section class="award-group"><div class="award-group-heading"><span class="award-mark crest-mark">♢</span><div><span class="section-kicker">CRESTS</span><h4>Crests</h4></div></div><div id="crest-list" class="award-list"></div></section>
+            <section class="award-group"><div class="award-group-heading"><span class="award-mark achievement-mark">✧</span><div><span class="section-kicker">RECOGNITION</span><h4>Achievements</h4></div></div><div id="achievement-list" class="award-list"></div></section>
           </div>
         </section>
 
-        <section class="section">
-          <div class="section-heading">
-            <div>
-              <div class="section-kicker">RECORDED EARNINGS</div>
-              <h3>Bond Activity</h3>
-            </div>
-          </div>
-          <div id="activity-list" class="activity-list"></div>
-          <div id="activity-note" class="source-note"></div>
-        </section>
-
-        <section class="section">
-          <div class="section-heading">
-            <div>
-              <div class="section-kicker">ACCOUNT STATEMENT</div>
-              <h3>Transaction History</h3>
-            </div>
-          </div>
+        <section class="section deductions-section" aria-labelledby="deductions-title">
+          <div class="section-heading"><div><div class="section-kicker">DEDUCTIONS / PURCHASES</div><h3 id="deductions-title">Outgoing Bonds</h3></div></div>
           <div id="transaction-list" class="transaction-list"></div>
         </section>
 
-        <section class="section">
-          <div class="section-heading">
-            <div>
-              <div class="section-kicker">ARCHIVE</div>
-              <h3>Monthly Record</h3>
-            </div>
-          </div>
+        <section class="section archive-section" aria-labelledby="archive-title">
+          <div class="section-heading"><div><div class="section-kicker">MONTHLY HISTORY</div><h3 id="archive-title">Chronicle Archive</h3></div></div>
           <div id="monthly-list" class="monthly-list"></div>
         </section>
 
-        <div class="display-only">
-          <span class="dot"></span>
-          DISPLAY ONLY · STAFF RECORDS ARE THE SOURCE OF TRUTH
-        </div>
+        <div class="display-only"><span class="dot"></span> DISPLAY ONLY · STAFF RECORDS ARE THE SOURCE OF TRUTH</div>
       </section>
     </main>
 
-    <footer>
-      <span>ELITE X · BONDS 💴</span>
-      <span>PUBLIC MEMBER PORTAL</span>
+    <footer class="site-footer">
+      <div class="footer-brand"><div class="footer-title">𝙀𝙇𝙄𝙏𝙀 𝙓</div><p>Éminence · Legacy · Influence · Tradition · Excellence · Xinier</p></div>
+      <div class="footer-columns">
+        <div><span class="footer-label">OFFICIAL MEMBER PORTAL</span><p>Member Records · Bond Records · Achievements · Chronicles</p></div>
+        <div><span class="footer-label">CONNECT WITH ELITE X</span><p><a href="https://facebook.com/groups/1561975335618340/" target="_blank" rel="noopener noreferrer">Facebook Group ↗</a><a href="https://www.facebook.com/profile.php?id=61593696047637" target="_blank" rel="noopener noreferrer">Facebook Page ↗</a></p></div>
+      </div>
+      <div class="footer-bottom"><span>For archival and reference purposes.</span><span>© 2026 ELITE X · All Rights Reserved</span></div>
     </footer>
   </div>
   <script src="script.js"></script>
 </body>
-                                                                                               </html>
-
-  
+</html>
