@@ -1,103 +1,986 @@
-"""Build public ELITE X portal data from the private workbook.
-The browser never calculates Bonds. The workbook remains the source of truth.
-This builder supports the current workbook layout and the intended activity-log
-reference layout, so blank/current records still produce a functional portal.
-"""
-import sys,json
-from datetime import datetime,date
+"""Build public ELITE X portal data from the private Excel workbook."""
+
+import json
+import sys
+from datetime import date, datetime
+from pathlib import Path
+
 from openpyxl import load_workbook
-if len(sys.argv)!=2: raise SystemExit('Usage: python scripts/build_data.py <private-workbook.xlsx>')
-src=sys.argv[1]; wb=load_workbook(src,data_only=True)
-reg,bond,att,ded,awards_sheet,arch,act,settings=[wb[s] for s in ['Member Registry','Bond Record','ATTENDANCE','Deductions','Awards & Achievements','Monthly Archive','Activity Log','Settings']]
-ALLOWED_STATUS={'ACTIVE','ON LEAVE','INACTIVE','RESIGNED','REMOVED'}
-ALLOWED_CAT={'MEDALLION','CREST','ACHIEVEMENT'}; TX={'DEDUCTION','SHOP PURCHASE'}
-def text(v): return str(v).strip() if v is not None else ''
-def num(v):
- try: return None if v in (None,'') else float(v)
- except: return None
-def clean(v):
- n=num(v); return None if n is None else int(n) if n.is_integer() else n
-def iso(v): return v.strftime('%Y-%m-%d') if isinstance(v,(datetime,date)) else text(v)
-def norm(v): return text(v).upper()
-# Activity Log is intentionally tolerant: intended public reference layout is A:F = ID, DATE, ACTIVITY NAME, TYPE, WEEK, # ENTRY.
-# The uploaded workbook currently still has the older member-transaction layout A:J. We can read its activity metadata if present, but never use its Bonds to calculate Bond Record values.
-activity_map={}
-headers=[norm(act.cell(6,c).value) for c in range(1,act.max_column+1)]
-if 'ACTIVITY NAME' in headers:
- def col(name): return headers.index(name)+1
- name_c=col('ACTIVITY NAME'); type_c=col('TYPE') if 'TYPE' in headers else None; week_c=col('WEEK') if 'WEEK' in headers else None; entry_c=col('# ENTRY') if '# ENTRY' in headers else None; date_c=col('DATE') if 'DATE' in headers else None
- for r in range(7,act.max_row+1):
-  name=text(act.cell(r,name_c).value); week=text(act.cell(r,week_c).value) if week_c else ''; entry=num(act.cell(r,entry_c).value) if entry_c else None
-  if not name or not week or entry is None: continue
-  key=(norm(week),int(entry)); activity_map[key]={'name':name,'type':text(act.cell(r,type_c).value) if type_c else 'RECORDED ACTIVITY','date':iso(act.cell(r,date_c).value) if date_c else ''}
-# Members and actual Bond Record entries. Detect week groups from merged/header cells rather than hardcoding a stale 3-week layout.
-week_groups=[]; current=None
-for c in range(4,bond.max_column+1):
- h=text(bond.cell(7,c).value)
- sub=text(bond.cell(8,c).value)
- if h.upper().startswith('WEEK '): current=h
- elif h: current=None
- elif current and sub.upper().startswith('ACTIVITY'):
-  week_groups.append((current,c))
-# unique group starts, up to calculated columns
-seen=[]; groups=[]
-for w,c in week_groups:
- if (w,c) not in seen: groups.append((w,c)); seen.append((w,c))
-# fallback for conventional D:G/H:K/L:O/M... if headers are malformed
-if not groups: groups=[('Week 1',4),('Week 2',8),('Week 3',12),('Week 4',16)]
-members={}
-# only activity cells before first non-week calculated header; current file has D:O, with P:R totals
-for r in range(6,106):
- mid=norm(reg.cell(r,1).value); name=text(reg.cell(r,2).value)
- if not mid or not name: continue
- br=r+3; entries=[]
- for week,start in groups:
-  for i in range(4):
-   c=start+i
-   if c>bond.max_column: break
-   v=num(bond.cell(br,c).value)
-   if v is None or v==0: continue
-   key=(norm(week),i+1); meta=activity_map.get(key,{})
-   entries.append({'week':week,'entry':i+1,'bonds':clean(v),'name':meta.get('name') or f'Activity {i+1}','type':meta.get('type') or 'RECORDED ACTIVITY','date':meta.get('date','')})
- # Attendance: current workbook uses C:V as 4 groups of 5 days and W as total Bonds.
- aw=att
- att_weeks=[]; perfect=0; present_total=0; required_total=0
- for wi,start in enumerate((3,8,13,18),1):
-  vals=[norm(aw.cell(br,start+i).value) for i in range(5)]
-  present=sum(v=='✓' for v in vals); required=5; isperfect=present==required; perfect+=int(isperfect); present_total+=present; required_total+=required
-  labels=['ID CHECK','TUE','WED','THU','FRI']; att_weeks.append({'week':f'Week {wi}','presentDays':present,'requiredDays':required,'perfect':isperfect,'days':[{'label':labels[i],'present':vals[i]=='✓'} for i in range(5)]})
- att_bonds=clean(aw.cell(br,23).value) or 0
- attendance={'weeks':att_weeks,'perfectWeeks':perfect,'totalWeeks':4,'perfectChronicle':perfect==4,'bonus':att_bonds,'presentDays':present_total,'requiredDays':required_total}
- # Current Bond Record calculated columns are P/Q/R, status S. Use workbook cached values when present, but fallback to direct entry sums for blank/stale caches.
- entry_total=sum(num(a['bonds']) or 0 for a in entries)
- monthly=clean(bond.cell(br,16).value); deductions=clean(bond.cell(br,17).value); net=clean(bond.cell(br,18).value)
- if monthly is None: monthly=clean(entry_total+att_bonds)
- if deductions is None:
-  deductions=sum(num(ded.cell(rr,7).value) or 0 for rr in range(7,207) if norm(ded.cell(rr,3).value)==mid and norm(ded.cell(rr,5).value)=='DEDUCTION')
-  deductions=clean(deductions)
- if net is None: net=clean((num(monthly) or 0)-(num(deductions) or 0))
- shop=sum(num(ded.cell(rr,7).value) or 0 for rr in range(7,207) if norm(ded.cell(rr,3).value)==mid and norm(ded.cell(rr,5).value)=='SHOP PURCHASE')
- members[mid]={'id':mid,'name':name,'rank':text(reg.cell(r,3).value) or '—','status':norm(reg.cell(r,4).value) if norm(reg.cell(r,4).value) in ALLOWED_STATUS else '', 'joinDate':iso(reg.cell(r,5).value),'crests':int(num(reg.cell(r,6).value) or 0),'medallion':int(num(reg.cell(r,7).value) or 0),'monthlyEarned':monthly,'deductions':deductions,'overallNet':net,'shopSpending':clean(shop),'weeklyEntries':entries,'attendance':attendance}
-# Transactions, public-safe fields only.
-transactions=[]
-for r in range(7,207):
- mid=norm(ded.cell(r,3).value); typ=norm(ded.cell(r,5).value); amount=num(ded.cell(r,7).value)
- if mid not in members or typ not in TX or amount is None: continue
- transactions.append({'memberId':mid,'date':iso(ded.cell(r,2).value),'type':typ,'description':text(ded.cell(r,6).value),'amount':clean(amount)})
-# Historical archive.
-monthly={}
-for r in range(6,106):
- mid=norm(arch.cell(r,1).value)
- if mid in members:
-  monthly[mid]={text(arch.cell(5,c).value).title():clean(arch.cell(r,c).value) for c in range(3,7) if text(arch.cell(5,c).value)}
-# Earned awards only, with no notes/recorder data.
-awards=[]
-for r in range(7,207):
- mid=norm(awards_sheet.cell(r,3).value); cat=norm(awards_sheet.cell(r,5).value); status=norm(awards_sheet.cell(r,7).value); name=text(awards_sheet.cell(r,6).value)
- if mid in members and cat in ALLOWED_CAT and status=='EARNED' and name: awards.append({'memberId':mid,'date':iso(awards_sheet.cell(r,2).value),'category':cat,'name':name,'status':'EARNED'})
-# Public rules are reference only. They never recalculate records in the browser.
-guidelines=[{'label':'ATTENDANCE','value':'2 Bonds','detail':'Per attendance · Tuesday–Friday'},{'label':'ID INSPECTION','value':'5 Bonds','detail':'Per ID check · Monday'},{'label':'GAMBIT','value':'+5–10 Bonds','detail':'Maximum 30 per chronicle'},{'label':'CONQUEST','value':'+15–20 Bonds','detail':'Maximum 50 per chronicle'},{'label':'COMMISSION','value':'+20–30 Bonds','detail':'Maximum 50 per chronicle'},{'label':'WEEKLY LIMIT','value':'100 Bonds','detail':'Maximum earned per member per week'}]
-out={'version':'2.0','currency':'BONDS 💴','source':'ELITE X Private Staff Records','generatedAt':date.today().isoformat(),'members':list(members.values()),'transactions':transactions,'awards':awards,'monthlyArchive':monthly,'bondGuidelines':guidelines,'activityLog':activity_map}
-with open('data.json','w',encoding='utf-8') as f: json.dump(out,f,ensure_ascii=False,indent=2)
-print(f'Wrote data.json · members={len(members)} awards={len(awards)}')
-   
+
+
+# ------------------------------------------------------------
+# CONFIG
+# ------------------------------------------------------------
+
+ALLOWED_STATUS = {
+    "ACTIVE",
+    "ON LEAVE",
+    "INACTIVE",
+    "RESIGNED",
+    "REMOVED",
+}
+
+ALLOWED_AWARD_CATEGORIES = {
+    "MEDALLION",
+    "CREST",
+    "ACHIEVEMENT",
+}
+
+TRANSACTION_TYPES = {
+    "DEDUCTION",
+    "SHOP PURCHASE",
+}
+
+
+# ------------------------------------------------------------
+# BASIC HELPERS
+# ------------------------------------------------------------
+
+def text(value):
+    return str(value).strip() if value is not None else ""
+
+
+def norm(value):
+    return text(value).upper()
+
+
+def number(value):
+    if value in (None, ""):
+        return None
+
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def clean_number(value):
+    value = number(value)
+
+    if value is None:
+        return None
+
+    return int(value) if value.is_integer() else value
+
+
+def iso_date(value):
+    if isinstance(value, (datetime, date)):
+        return value.strftime("%Y-%m-%d")
+
+    return text(value)
+
+
+def headers(sheet, row):
+    """Return a normalized header -> column map."""
+
+    return {
+        norm(sheet.cell(row, column).value): column
+        for column in range(1, sheet.max_column + 1)
+        if text(sheet.cell(row, column).value)
+    }
+
+
+def require_headers(sheet, row, required):
+    result = headers(sheet, row)
+
+    missing = [
+        item
+        for item in required
+        if norm(item) not in result
+    ]
+
+    if missing:
+        raise ValueError(
+            f"{sheet.title}: missing header(s): {', '.join(missing)}"
+        )
+
+    return result
+
+
+def canonical_week(value):
+    """Convert 1, 1.0, '1', 'Week 1', etc. into 'Week 1'."""
+
+    numeric = number(value)
+
+    if numeric is not None and numeric.is_integer():
+        return f"Week {int(numeric)}"
+
+    raw = text(value)
+
+    digits = "".join(
+        char for char in raw
+        if char.isdigit()
+    )
+
+    if digits:
+        return f"Week {int(digits)}"
+
+    return raw
+
+
+# ------------------------------------------------------------
+# ACTIVITY LOG
+# ------------------------------------------------------------
+
+def read_activity_log(sheet):
+    """
+    Activity Log:
+    A = ID
+    B = DATE
+    C = ACTIVITY NAME
+    D = TYPE
+    E = WEEK
+    F = # ENTRY
+    """
+
+    h = require_headers(
+        sheet,
+        6,
+        [
+            "ID",
+            "DATE",
+            "ACTIVITY NAME",
+            "TYPE",
+            "WEEK",
+            "# ENTRY",
+        ],
+    )
+
+    activities = []
+
+    for row in range(7, sheet.max_row + 1):
+
+        name = text(
+            sheet.cell(row, h[norm("ACTIVITY NAME")]).value
+        )
+
+        week = canonical_week(
+            sheet.cell(row, h[norm("WEEK")]).value
+        )
+
+        entry = number(
+            sheet.cell(row, h[norm("# ENTRY")]).value
+        )
+
+        if not name or not week or entry is None:
+            continue
+
+        activities.append(
+            {
+                "week": week,
+                "entry": int(entry),
+                "name": name,
+                "type": (
+                    text(
+                        sheet.cell(
+                            row,
+                            h[norm("TYPE")]
+                        ).value
+                    )
+                    or "RECORDED ACTIVITY"
+                ),
+                "date": iso_date(
+                    sheet.cell(
+                        row,
+                        h[norm("DATE")]
+                    ).value
+                ),
+            }
+        )
+
+    return activities
+
+
+# ------------------------------------------------------------
+# BOND RECORD
+# ------------------------------------------------------------
+
+def read_bond_record(sheet, activity_log):
+
+    h = require_headers(
+        sheet,
+        7,
+        [
+            "MEMBER ID",
+            "MEMBER",
+            "RANK",
+            "MONTHLY EARNED 💴",
+            "DEDUCTIONS 💴",
+            "OVERALL NET 💴",
+            "STATUS",
+        ],
+    )
+
+    # Convert activity records into a lookup table.
+    #
+    # IMPORTANT:
+    # We use a string key instead of a tuple so that nothing
+    # containing this lookup is accidentally written to JSON.
+    activity_lookup = {}
+
+    for activity in activity_log:
+
+        key = (
+            activity["week"].upper()
+            + "|"
+            + str(activity["entry"])
+        )
+
+        activity_lookup[key] = activity
+
+    # Detect the weekly activity columns from the spreadsheet.
+    activity_columns = []
+    current_week = None
+
+    for column in range(1, sheet.max_column + 1):
+
+        week_header = text(
+            sheet.cell(7, column).value
+        )
+
+        activity_header = norm(
+            sheet.cell(8, column).value
+        )
+
+        if week_header.upper().startswith("WEEK "):
+            current_week = canonical_week(
+                week_header
+            )
+
+        if (
+            current_week
+            and activity_header.startswith("ACTIVITY")
+        ):
+
+            activity_number = number(
+                activity_header
+                .replace("ACTIVITY", "")
+                .replace("💴", "")
+                .strip()
+            )
+
+            if activity_number is not None:
+
+                activity_columns.append(
+                    (
+                        column,
+                        current_week,
+                        int(activity_number),
+                    )
+                )
+
+    members = {}
+
+    for row in range(9, sheet.max_row + 1):
+
+        member_id = norm(
+            sheet.cell(
+                row,
+                h[norm("MEMBER ID")]
+            ).value
+        )
+
+        name = text(
+            sheet.cell(
+                row,
+                h[norm("MEMBER")]
+            ).value
+        )
+
+        if not member_id or not name:
+            continue
+
+        weekly_entries = []
+
+        for column, week, entry_number in activity_columns:
+
+            bonds = clean_number(
+                sheet.cell(row, column).value
+            )
+
+            if bonds in (None, 0):
+                continue
+
+            key = (
+                week.upper()
+                + "|"
+                + str(entry_number)
+            )
+
+            activity = activity_lookup.get(
+                key,
+                {}
+            )
+
+            weekly_entries.append(
+                {
+                    "week": week,
+                    "entry": entry_number,
+                    "bonds": bonds,
+                    "name": activity.get(
+                        "name",
+                        f"Activity {entry_number}"
+                    ),
+                    "type": activity.get(
+                        "type",
+                        "RECORDED ACTIVITY"
+                    ),
+                    "date": activity.get(
+                        "date",
+                        ""
+                    ),
+                }
+            )
+
+        status = norm(
+            sheet.cell(
+                row,
+                h[norm("STATUS")]
+            ).value
+        )
+
+        members[member_id] = {
+            "id": member_id,
+            "name": name,
+            "rank": (
+                text(
+                    sheet.cell(
+                        row,
+                        h[norm("RANK")]
+                    ).value
+                )
+                or "—"
+            ),
+            "status": (
+                status
+                if status in ALLOWED_STATUS
+                else ""
+            ),
+            "monthlyEarned": clean_number(
+                sheet.cell(
+                    row,
+                    h[norm("MONTHLY EARNED 💴")]
+                ).value
+            ),
+            "deductions": clean_number(
+                sheet.cell(
+                    row,
+                    h[norm("DEDUCTIONS 💴")]
+                ).value
+            ),
+            "overallNet": clean_number(
+                sheet.cell(
+                    row,
+                    h[norm("OVERALL NET 💴")]
+                ).value
+            ),
+            "weeklyEntries": weekly_entries,
+        }
+
+    return members
+
+
+# ------------------------------------------------------------
+# MEMBER REGISTRY
+# ------------------------------------------------------------
+
+def read_registry(sheet, members):
+
+    h = require_headers(
+        sheet,
+        5,
+        [
+            "MEMBER ID",
+            "MEMBER",
+            "RANK",
+            "STATUS",
+            "JOIN DATE",
+            "Crests",
+            "Medallion",
+        ],
+    )
+
+    id_column = h[norm("MEMBER ID")]
+
+    registry_rows = {}
+
+    for row in range(6, sheet.max_row + 1):
+
+        member_id = norm(
+            sheet.cell(row, id_column).value
+        )
+
+        if member_id:
+            registry_rows[member_id] = row
+
+    for member_id, member in members.items():
+
+        row = registry_rows.get(member_id)
+
+        if row is None:
+            continue
+
+        member["name"] = (
+            text(
+                sheet.cell(
+                    row,
+                    h[norm("MEMBER")]
+                ).value
+            )
+            or member["name"]
+        )
+
+        member["rank"] = (
+            text(
+                sheet.cell(
+                    row,
+                    h[norm("RANK")]
+                ).value
+            )
+            or member["rank"]
+        )
+
+        status = norm(
+            sheet.cell(
+                row,
+                h[norm("STATUS")]
+            ).value
+        )
+
+        if status in ALLOWED_STATUS:
+            member["status"] = status
+
+        member["joinDate"] = iso_date(
+            sheet.cell(
+                row,
+                h[norm("JOIN DATE")]
+            ).value
+        )
+
+        member["crests"] = int(
+            number(
+                sheet.cell(
+                    row,
+                    h[norm("Crests")]
+                ).value
+            )
+            or 0
+        )
+
+        member["medallion"] = int(
+            number(
+                sheet.cell(
+                    row,
+                    h[norm("Medallion")]
+                ).value
+            )
+            or 0
+        )
+
+    return members
+
+
+# ------------------------------------------------------------
+# ATTENDANCE
+# ------------------------------------------------------------
+
+def read_attendance(sheet, members):
+
+    h = require_headers(
+        sheet,
+        7,
+        [
+            "MEMBER ID",
+            "MEMBER",
+            "ATTENDANCE BONDS 💴",
+        ],
+    )
+
+    # Actual workbook structure:
+    #
+    # Week 1 = C:G
+    # Week 2 = I:M
+    # Week 3 = O:S
+    # Week 4 = U:Y
+    #
+    # P.Att. columns are H, N, T, Z.
+    # Attendance Bonds are AB.
+
+    week_columns = []
+    current_week = None
+
+    for column in range(1, sheet.max_column + 1):
+
+        week_header = text(
+            sheet.cell(7, column).value
+        )
+
+        day_header = norm(
+            sheet.cell(8, column).value
+        )
+
+        if week_header.upper().startswith("WEEK "):
+            current_week = canonical_week(
+                week_header
+            )
+
+        if (
+            current_week
+            and day_header == "MON"
+        ):
+            week_columns.append(
+                (
+                    current_week,
+                    column
+                )
+            )
+
+    for row in range(9, sheet.max_row + 1):
+
+        member_id = norm(
+            sheet.cell(
+                row,
+                h[norm("MEMBER ID")]
+            ).value
+        )
+
+        if member_id not in members:
+            continue
+
+        weeks = []
+        perfect_weeks = 0
+        present_total = 0
+        required_total = 0
+
+        for week, monday_column in week_columns:
+
+            values = [
+                norm(
+                    sheet.cell(
+                        row,
+                        monday_column + offset
+                    ).value
+                )
+                for offset in range(5)
+            ]
+
+            present_days = sum(
+                value == "✓"
+                for value in values
+            )
+
+            perfect = present_days == 5
+
+            if perfect:
+                perfect_weeks += 1
+
+            present_total += present_days
+            required_total += 5
+
+            labels = [
+                "MON",
+                "TUE",
+                "WED",
+                "THU",
+                "FRI",
+            ]
+
+            weeks.append(
+                {
+                    "week": week,
+                    "presentDays": present_days,
+                    "requiredDays": 5,
+                    "perfect": perfect,
+                    "days": [
+                        {
+                            "label": labels[index],
+                            "present": (
+                                values[index] == "✓"
+                            ),
+                        }
+                        for index in range(5)
+                    ],
+                }
+            )
+
+        members[member_id]["attendance"] = {
+            "weeks": weeks,
+            "perfectWeeks": perfect_weeks,
+            "totalWeeks": len(week_columns),
+            "perfectChronicle": (
+                bool(week_columns)
+                and perfect_weeks == len(week_columns)
+            ),
+            "bonus": (
+                clean_number(
+                    sheet.cell(
+                        row,
+                        h[norm("ATTENDANCE BONDS 💴")]
+                    ).value
+                )
+                or 0
+            ),
+            "presentDays": present_total,
+            "requiredDays": required_total,
+        }
+
+    return members
+
+
+# ------------------------------------------------------------
+# DEDUCTIONS / SHOP
+# ------------------------------------------------------------
+
+def read_transactions(sheet, members):
+
+    h = require_headers(
+        sheet,
+        6,
+        [
+            "ID",
+            "DATE",
+            "MEMBER ID",
+            "TRANSACTION TYPE",
+            "REASON / ITEM",
+            "AMOUNT 💴",
+        ],
+    )
+
+    transactions = []
+
+    for row in range(7, sheet.max_row + 1):
+
+        member_id = norm(
+            sheet.cell(
+                row,
+                h[norm("MEMBER ID")]
+            ).value
+        )
+
+        transaction_type = norm(
+            sheet.cell(
+                row,
+                h[norm("TRANSACTION TYPE")]
+            ).value
+        )
+
+        amount = number(
+            sheet.cell(
+                row,
+                h[norm("AMOUNT 💴")]
+            ).value
+        )
+
+        if (
+            member_id not in members
+            or transaction_type not in TRANSACTION_TYPES
+            or amount is None
+        ):
+            continue
+
+        transactions.append(
+            {
+                "memberId": member_id,
+                "date": iso_date(
+                    sheet.cell(
+                        row,
+                        h[norm("DATE")]
+                    ).value
+                ),
+                "type": transaction_type,
+                "description": text(
+                    sheet.cell(
+                        row,
+                        h[norm("REASON / ITEM")]
+                    ).value
+                ),
+                "amount": clean_number(amount),
+            }
+        )
+
+    return transactions
+
+
+# ------------------------------------------------------------
+# AWARDS
+# ------------------------------------------------------------
+
+def read_awards(sheet, members):
+
+    h = require_headers(
+        sheet,
+        6,
+        [
+            "AWARD ID",
+            "DATE",
+            "MEMBER ID",
+            "CATEGORY",
+            "AWARD / ACHIEVEMENT",
+            "STATUS",
+        ],
+    )
+
+    awards = []
+
+    for row in range(7, sheet.max_row + 1):
+
+        member_id = norm(
+            sheet.cell(
+                row,
+                h[norm("MEMBER ID")]
+            ).value
+        )
+
+        category = norm(
+            sheet.cell(
+                row,
+                h[norm("CATEGORY")]
+            ).value
+        )
+
+        status = norm(
+            sheet.cell(
+                row,
+                h[norm("STATUS")]
+            ).value
+        )
+
+        name = text(
+            sheet.cell(
+                row,
+                h[norm("AWARD / ACHIEVEMENT")]
+            ).value
+        )
+
+        if (
+            member_id not in members
+            or category not in ALLOWED_AWARD_CATEGORIES
+            or status != "EARNED"
+            or not name
+        ):
+            continue
+
+        awards.append(
+            {
+                "memberId": member_id,
+                "date": iso_date(
+                    sheet.cell(
+                        row,
+                        h[norm("DATE")]
+                    ).value
+                ),
+                "category": category,
+                "name": name,
+                "status": "EARNED",
+            }
+        )
+
+    return awards
+
+
+# ------------------------------------------------------------
+# MONTHLY ARCHIVE
+# ------------------------------------------------------------
+
+def read_monthly_archive(sheet, members):
+
+    h = require_headers(
+        sheet,
+        5,
+        [
+            "MEMBER ID",
+            "MEMBER",
+        ],
+    )
+
+    archive = {}
+
+    id_column = h[norm("MEMBER ID")]
+
+    rows = {}
+
+    for row in range(6, sheet.max_row + 1):
+
+        member_id = norm(
+            sheet.cell(row, id_column).value
+        )
+
+        if member_id:
+            rows[member_id] = row
+
+    for member_id in members:
+
+        row = rows.get(member_id)
+
+        if row is None:
+            continue
+
+        values = {}
+
+        for column in range(3, sheet.max_column + 1):
+
+            label = text(
+                sheet.cell(5, column).value
+            )
+
+            if not label:
+                continue
+
+            value = clean_number(
+                sheet.cell(row, column).value
+            )
+
+            if value is not None:
+                values[label.title()] = value
+
+        archive[member_id] = values
+
+    return archive
+
+
+# ------------------------------------------------------------
+# MAIN
+# ------------------------------------------------------------
+
+def main():
+
+    if len(sys.argv) != 2:
+        raise SystemExit(
+            "Usage: python scripts/build_data.py <private-workbook.xlsx>"
+        )
+
+    source = Path(sys.argv[1])
+
+    if not source.exists():
+        raise SystemExit(
+            f"Workbook not found: {source}"
+        )
+
+    workbook = load_workbook(
+        source,
+        data_only=True
+    )
+
+    sheets = {
+        name: workbook[name]
+        for name in [
+            "Member Registry",
+            "Bond Record",
+            "ATTENDANCE",
+            "Deductions",
+            "Awards & Achievements",
+            "Monthly Archive",
+            "Activity Log",
+        ]
+    }
+
+    # Read the private workbook.
+    activity_log = read_activity_log(
+        sheets["Activity Log"]
+    )
+
+    members = read_bond_record(
+        sheets["Bond Record"],
+        activity_log
+    )
+
+    members = read_registry(
+        sheets["Member Registry"],
+        members
+    )
+
+    members = read_attendance(
+        sheets["ATTENDANCE"],
+        members
+    )
+
+    transactions = read_transactions(
+        sheets["Deductions"],
+        members
+    )
+
+    awards = read_awards(
+        sheets["Awards & Achievements"],
+        members
+    )
+
+    monthly_archive = read_monthly_archive(
+        sheets["Monthly Archive"],
+        members
+    )
+
+   # Public reference rules.
+    guidelines = [
+        {
+            "label": "ATTENDANCE",
+            "value": "2 Bonds",
+            "detail": "Per attendance · Tuesday–Friday",
+        },
+        {
+            "label": "ID INSPECTION",
+            "value": "5 Bonds",
+            "detail": "Per ID check · Monday",
+        },
+        {
+            "label": "GAMBIT",
+            "value": "+5–10 Bonds",
+            "detail": "Maximum 30 per chronicle",
+        },
+        {
+            "label": "CONQUEST",
+            "value": "+15–20 Bonds",
+            "detail": "Maximum 50 per chronicle",
+        },
+        {
+            "label": "COMMISSION",
+            "value": "+20–30 Bonds",
+            "detail": "Maximum 50 per chronicle",
+        },
+        {
+            "label": "WEEKLY LIMIT",
+            "value": "100 Bonds",
+            "detail": "Maximum earned per member per week",
+        },
+    ]
+
+    output = {
+        "version": "2.0",
+        "currency": "BONDS 💴",
+        "source": "ELITE X Private Staff Records",
+        "generatedAt": date.today().isoformat(),
+        "members": list(members.values()),
+        "transactions": transactions,
+        "awards": awards,
+        "monthlyArchive": monthly_archive,
+        "bondGuidelines": guidelines,
+
+        # IMPORTANT:
+        # This is now a LIST, not a dictionary with tuple keys.
+        # Therefore JSON can serialize it safely.
+        "activityLog": activity_log,
+    }
+
+    with open(
+        "data.json",
+        "w",
+        encoding="utf-8"
+    ) as file:
+
+        json.dump(
+            output,
+            file,
+            ensure_ascii=False,
+            indent=2
+        )
+
+    print(
+        "Wrote data.json · "
+        f"members={len(members)} · "
+        f"transactions={len(transactions)} · "
+        f"awards={len(awards)} · "
+        f"activities={len(activity_log)}"
+    )
+
+
+if __name__ == "__main__":
+    main()
