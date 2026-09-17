@@ -6,17 +6,721 @@
   "members": [
     {
       "id": "ELX-001",
-      "name": "Izumi",
-      "rank": "Initiate",
-      "status": "ACTIVE",
-      "joinDate": "2026-09-12",
+      "name": "YUKARI",
+      "rank": "Vassal",
+      "status": "RESIGNED",
+      "monthlyEarned": 307,
+      "deductions": 0,
+      "overallNet": 307,
+      "weeklyEntries": [
+        {
+          "week": "Week 1",
+          "entry": 1,
+          "bonds": 67,
+          "name": "TEST NAME",
+          "type": "Gambit",
+          "date": "2026-09-12"
+        },
+        {
+          "week": "Week 1",
+          "entry": 2,
+          "bonds": 35,
+          "name": "Womp",
+          "type": "Conquest",
+          "date": "2026-09-15"
+        },
+        {
+          "week": "Week 1",
+          "entry": 3,
+          "bonds": 90,
+          "name": "Test Name",
+          "type": "Commission",
+          "date": "2026-09-16"
+        },
+        {
+          "week": "Week 1",
+          "entry": 4,
+          "bonds": 100,
+          "name": "Comp Day",
+          "type": "Colloseum",
+          "date": "2026-09-17"
+        }
+      ],
+      "joinDate": "2026-08-12",
+      "crests": 1,
+      "medallion": 1,
+      "attendance": {
+        "weeks": [
+          {
+            "week": "Week 1",
+            "presentDays": 5,
+            "requiredDays": 5,
+            "perfect": true,
+            "days": [
+              {
+                "label": "MON",
+                "present": true
+              },
+              {
+                "label": "TUE",
+                "present": true
+              },
+              {
+                "label": "WED",
+                "present": true
+              },
+              {
+                "label": "THU",
+                "present": true
+              },
+              {
+                "label": "FRI",
+                "present": true
+              }
+            ]
+          },
+          {
+            "week": "Week 2",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "MON",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 3",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "MON",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 4",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "MON",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          }
+        ],
+        "perfectWeeks": 1,
+        "totalWeeks": 4,
+        "perfectChronicle": false,
+        "bonus": 15,
+        "presentDays": 5,
+        "requiredDays": 20
+      }
+    },
+    {
+      "id": "ELX-002",
+      "name": "IZUMI",
+      "rank": "Vassal",
+      "status": "REMOVED",
+      "monthlyEarned": 256,
+      "deductions": 0,
+      "overallNet": 256,
+      "weeklyEntries": [
+        {
+          "week": "Week 1",
+          "entry": 1,
+          "bonds": 50,
+          "name": "TEST NAME",
+          "type": "Gambit",
+          "date": "2026-09-12"
+        },
+        {
+          "week": "Week 1",
+          "entry": 2,
+          "bonds": 20,
+          "name": "Womp",
+          "type": "Conquest",
+          "date": "2026-09-15"
+        },
+        {
+          "week": "Week 1",
+          "entry": 3,
+          "bonds": 80,
+          "name": "Test Name",
+          "type": "Commission",
+          "date": "2026-09-16"
+        },
+        {
+          "week": "Week 1",
+          "entry": 4,
+          "bonds": 100,
+          "name": "Comp Day",
+          "type": "Colloseum",
+          "date": "2026-09-17"
+        }
+      ],
+      "joinDate": "2026-09-02",
       "crests": 0,
       "medallion": 0,
-      "monthlyEarned": 0,
-      "deductions": 10,
-      "overallNet": -10,
-      "shopSpending": 28,
-      "weeklyEntries": [],
+      "attendance": {
+        "weeks": [
+          {
+            "week": "Week 1",
+            "presentDays": 3,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "MON",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": true
+              },
+              {
+                "label": "WED",
+                "present": true
+              },
+              {
+                "label": "THU",
+                "present": true
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 2",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "MON",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 3",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "MON",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 4",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "MON",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          }
+        ],
+        "perfectWeeks": 0,
+        "totalWeeks": 4,
+        "perfectChronicle": false,
+        "bonus": 6,
+        "presentDays": 3,
+        "requiredDays": 20
+      }
+    },
+    {
+      "id": "ELX-003",
+      "name": "Member Test",
+      "rank": "Vassal",
+      "status": "ON LEAVE",
+      "monthlyEarned": 299,
+      "deductions": 0,
+      "overallNet": 299,
+      "weeklyEntries": [
+        {
+          "week": "Week 1",
+          "entry": 1,
+          "bonds": 70,
+          "name": "TEST NAME",
+          "type": "Gambit",
+          "date": "2026-09-12"
+        },
+        {
+          "week": "Week 1",
+          "entry": 2,
+          "bonds": 40,
+          "name": "Womp",
+          "type": "Conquest",
+          "date": "2026-09-15"
+        },
+        {
+          "week": "Week 1",
+          "entry": 3,
+          "bonds": 80,
+          "name": "Test Name",
+          "type": "Commission",
+          "date": "2026-09-16"
+        },
+        {
+          "week": "Week 1",
+          "entry": 4,
+          "bonds": 100,
+          "name": "Comp Day",
+          "type": "Colloseum",
+          "date": "2026-09-17"
+        }
+      ],
+      "joinDate": "2026-09-02",
+      "crests": 0,
+      "medallion": 0,
+      "attendance": {
+        "weeks": [
+          {
+            "week": "Week 1",
+            "presentDays": 3,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "MON",
+                "present": true
+              },
+              {
+                "label": "TUE",
+                "present": true
+              },
+              {
+                "label": "WED",
+                "present": true
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 2",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "MON",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 3",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "MON",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 4",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "MON",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          }
+        ],
+        "perfectWeeks": 0,
+        "totalWeeks": 4,
+        "perfectChronicle": false,
+        "bonus": 9,
+        "presentDays": 3,
+        "requiredDays": 20
+      }
+    },
+    {
+      "id": "ELX-004",
+      "name": "Riku",
+      "rank": "Vassal",
+      "status": "ACTIVE",
+      "monthlyEarned": 292,
+      "deductions": 0,
+      "overallNet": 292,
+      "weeklyEntries": [
+        {
+          "week": "Week 1",
+          "entry": 1,
+          "bonds": 60,
+          "name": "TEST NAME",
+          "type": "Gambit",
+          "date": "2026-09-12"
+        },
+        {
+          "week": "Week 1",
+          "entry": 2,
+          "bonds": 34,
+          "name": "Womp",
+          "type": "Conquest",
+          "date": "2026-09-15"
+        },
+        {
+          "week": "Week 1",
+          "entry": 3,
+          "bonds": 90,
+          "name": "Test Name",
+          "type": "Commission",
+          "date": "2026-09-16"
+        },
+        {
+          "week": "Week 1",
+          "entry": 4,
+          "bonds": 100,
+          "name": "Comp Day",
+          "type": "Colloseum",
+          "date": "2026-09-17"
+        }
+      ],
+      "joinDate": "2026-09-05",
+      "crests": 0,
+      "medallion": 0,
+      "attendance": {
+        "weeks": [
+          {
+            "week": "Week 1",
+            "presentDays": 4,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "MON",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": true
+              },
+              {
+                "label": "WED",
+                "present": true
+              },
+              {
+                "label": "THU",
+                "present": true
+              },
+              {
+                "label": "FRI",
+                "present": true
+              }
+            ]
+          },
+          {
+            "week": "Week 2",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "MON",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 3",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "MON",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          },
+          {
+            "week": "Week 4",
+            "presentDays": 0,
+            "requiredDays": 5,
+            "perfect": false,
+            "days": [
+              {
+                "label": "MON",
+                "present": false
+              },
+              {
+                "label": "TUE",
+                "present": false
+              },
+              {
+                "label": "WED",
+                "present": false
+              },
+              {
+                "label": "THU",
+                "present": false
+              },
+              {
+                "label": "FRI",
+                "present": false
+              }
+            ]
+          }
+        ],
+        "perfectWeeks": 0,
+        "totalWeeks": 4,
+        "perfectChronicle": false,
+        "bonus": 8,
+        "presentDays": 4,
+        "requiredDays": 20
+      }
+    },
+    {
+      "id": "ELX-005",
+      "name": "Shin",
+      "rank": "Vassal",
+      "status": "INACTIVE",
+      "monthlyEarned": 283,
+      "deductions": 0,
+      "overallNet": 283,
+      "weeklyEntries": [
+        {
+          "week": "Week 1",
+          "entry": 1,
+          "bonds": 57,
+          "name": "TEST NAME",
+          "type": "Gambit",
+          "date": "2026-09-12"
+        },
+        {
+          "week": "Week 1",
+          "entry": 2,
+          "bonds": 25,
+          "name": "Womp",
+          "type": "Conquest",
+          "date": "2026-09-15"
+        },
+        {
+          "week": "Week 1",
+          "entry": 3,
+          "bonds": 97,
+          "name": "Test Name",
+          "type": "Commission",
+          "date": "2026-09-16"
+        },
+        {
+          "week": "Week 1",
+          "entry": 4,
+          "bonds": 100,
+          "name": "Comp Day",
+          "type": "Colloseum",
+          "date": "2026-09-17"
+        }
+      ],
+      "joinDate": "",
+      "crests": 0,
+      "medallion": 0,
       "attendance": {
         "weeks": [
           {
@@ -26,8 +730,8 @@
             "perfect": false,
             "days": [
               {
-                "label": "ID CHECK",
-                "present": true
+                "label": "MON",
+                "present": false
               },
               {
                 "label": "TUE",
@@ -35,7 +739,7 @@
               },
               {
                 "label": "WED",
-                "present": false
+                "present": true
               },
               {
                 "label": "THU",
@@ -54,7 +758,7 @@
             "perfect": false,
             "days": [
               {
-                "label": "ID CHECK",
+                "label": "MON",
                 "present": false
               },
               {
@@ -82,7 +786,7 @@
             "perfect": false,
             "days": [
               {
-                "label": "ID CHECK",
+                "label": "MON",
                 "present": false
               },
               {
@@ -110,7 +814,7 @@
             "perfect": false,
             "days": [
               {
-                "label": "ID CHECK",
+                "label": "MON",
                 "present": false
               },
               {
@@ -135,280 +839,8 @@
         "perfectWeeks": 0,
         "totalWeeks": 4,
         "perfectChronicle": false,
-        "bonus": 7,
+        "bonus": 4,
         "presentDays": 2,
-        "requiredDays": 20
-      }
-    },
-    {
-      "id": "ELX-002",
-      "name": "Member #2",
-      "rank": "Vestige",
-      "status": "ON LEAVE",
-      "joinDate": "2026-09-11",
-      "crests": 0,
-      "medallion": 0,
-      "monthlyEarned": 0,
-      "deductions": 0,
-      "overallNet": 0,
-      "shopSpending": 30,
-      "weeklyEntries": [],
-      "attendance": {
-        "weeks": [
-          {
-            "week": "Week 1",
-            "presentDays": 0,
-            "requiredDays": 5,
-            "perfect": false,
-            "days": [
-              {
-                "label": "ID CHECK",
-                "present": false
-              },
-              {
-                "label": "TUE",
-                "present": false
-              },
-              {
-                "label": "WED",
-                "present": false
-              },
-              {
-                "label": "THU",
-                "present": false
-              },
-              {
-                "label": "FRI",
-                "present": false
-              }
-            ]
-          },
-          {
-            "week": "Week 2",
-            "presentDays": 0,
-            "requiredDays": 5,
-            "perfect": false,
-            "days": [
-              {
-                "label": "ID CHECK",
-                "present": false
-              },
-              {
-                "label": "TUE",
-                "present": false
-              },
-              {
-                "label": "WED",
-                "present": false
-              },
-              {
-                "label": "THU",
-                "present": false
-              },
-              {
-                "label": "FRI",
-                "present": false
-              }
-            ]
-          },
-          {
-            "week": "Week 3",
-            "presentDays": 0,
-            "requiredDays": 5,
-            "perfect": false,
-            "days": [
-              {
-                "label": "ID CHECK",
-                "present": false
-              },
-              {
-                "label": "TUE",
-                "present": false
-              },
-              {
-                "label": "WED",
-                "present": false
-              },
-              {
-                "label": "THU",
-                "present": false
-              },
-              {
-                "label": "FRI",
-                "present": false
-              }
-            ]
-          },
-          {
-            "week": "Week 4",
-            "presentDays": 0,
-            "requiredDays": 5,
-            "perfect": false,
-            "days": [
-              {
-                "label": "ID CHECK",
-                "present": false
-              },
-              {
-                "label": "TUE",
-                "present": false
-              },
-              {
-                "label": "WED",
-                "present": false
-              },
-              {
-                "label": "THU",
-                "present": false
-              },
-              {
-                "label": "FRI",
-                "present": false
-              }
-            ]
-          }
-        ],
-        "perfectWeeks": 0,
-        "totalWeeks": 4,
-        "perfectChronicle": false,
-        "bonus": 0,
-        "presentDays": 0,
-        "requiredDays": 20
-      }
-    },
-    {
-      "id": "ELX-003",
-      "name": "Member test",
-      "rank": "Vestige",
-      "status": "ACTIVE",
-      "joinDate": "",
-      "crests": 0,
-      "medallion": 0,
-      "monthlyEarned": 0,
-      "deductions": 0,
-      "overallNet": 0,
-      "shopSpending": 0,
-      "weeklyEntries": [],
-      "attendance": {
-        "weeks": [
-          {
-            "week": "Week 1",
-            "presentDays": 0,
-            "requiredDays": 5,
-            "perfect": false,
-            "days": [
-              {
-                "label": "ID CHECK",
-                "present": false
-              },
-              {
-                "label": "TUE",
-                "present": false
-              },
-              {
-                "label": "WED",
-                "present": false
-              },
-              {
-                "label": "THU",
-                "present": false
-              },
-              {
-                "label": "FRI",
-                "present": false
-              }
-            ]
-          },
-          {
-            "week": "Week 2",
-            "presentDays": 0,
-            "requiredDays": 5,
-            "perfect": false,
-            "days": [
-              {
-                "label": "ID CHECK",
-                "present": false
-              },
-              {
-                "label": "TUE",
-                "present": false
-              },
-              {
-                "label": "WED",
-                "present": false
-              },
-              {
-                "label": "THU",
-                "present": false
-              },
-              {
-                "label": "FRI",
-                "present": false
-              }
-            ]
-          },
-          {
-            "week": "Week 3",
-            "presentDays": 0,
-            "requiredDays": 5,
-            "perfect": false,
-            "days": [
-              {
-                "label": "ID CHECK",
-                "present": false
-              },
-              {
-                "label": "TUE",
-                "present": false
-              },
-              {
-                "label": "WED",
-                "present": false
-              },
-              {
-                "label": "THU",
-                "present": false
-              },
-              {
-                "label": "FRI",
-                "present": false
-              }
-            ]
-          },
-          {
-            "week": "Week 4",
-            "presentDays": 0,
-            "requiredDays": 5,
-            "perfect": false,
-            "days": [
-              {
-                "label": "ID CHECK",
-                "present": false
-              },
-              {
-                "label": "TUE",
-                "present": false
-              },
-              {
-                "label": "WED",
-                "present": false
-              },
-              {
-                "label": "THU",
-                "present": false
-              },
-              {
-                "label": "FRI",
-                "present": false
-              }
-            ]
-          }
-        ],
-        "perfectWeeks": 0,
-        "totalWeeks": 4,
-        "perfectChronicle": false,
-        "bonus": 0,
-        "presentDays": 0,
         "requiredDays": 20
       }
     }
@@ -416,74 +848,85 @@
   "transactions": [
     {
       "memberId": "ELX-001",
-      "date": "2026-09-12",
+      "date": "",
       "type": "DEDUCTION",
-      "description": "Rule # Violation",
+      "description": "T",
+      "amount": 10
+    },
+    {
+      "memberId": "ELX-001",
+      "date": "",
+      "type": "DEDUCTION",
+      "description": "E",
       "amount": 10
     },
     {
       "memberId": "ELX-001",
       "date": "",
       "type": "SHOP PURCHASE",
-      "description": "Item #",
-      "amount": 28
+      "description": "S",
+      "amount": 50
+    },
+    {
+      "memberId": "ELX-001",
+      "date": "",
+      "type": "SHOP PURCHASE",
+      "description": "T",
+      "amount": 40
     },
     {
       "memberId": "ELX-002",
       "date": "",
       "type": "SHOP PURCHASE",
-      "description": "womo",
-      "amount": 30
+      "description": "UH",
+      "amount": 10
     },
     {
-      "memberId": "ELX-002",
+      "memberId": "ELX-001",
       "date": "",
-      "type": "DEDUCTION",
-      "description": "jjsjsjs",
+      "type": "SHOP PURCHASE",
+      "description": ":3",
       "amount": 10
     }
   ],
   "awards": [
     {
       "memberId": "ELX-001",
-      "date": "2026-09-12",
+      "date": "",
       "category": "ACHIEVEMENT",
-      "name": "AWARD NAME",
+      "name": "Perfect Attendance",
       "status": "EARNED"
     },
     {
       "memberId": "ELX-001",
       "date": "",
-      "category": "ACHIEVEMENT",
-      "name": "name",
+      "category": "MEDALLION",
+      "name": "1 Month Membership",
       "status": "EARNED"
     },
     {
       "memberId": "ELX-001",
       "date": "",
-      "category": "ACHIEVEMENT",
-      "name": ".",
+      "category": "CREST",
+      "name": "Try",
       "status": "EARNED"
     }
   ],
   "monthlyArchive": {
     "ELX-001": {
-      "September": null,
-      "October": null,
-      "November": null,
-      "December": null
+      "Overall Net 💴": 0
     },
     "ELX-002": {
-      "September": null,
-      "October": null,
-      "November": null,
-      "December": null
+      "Overall Net 💴": 0
     },
     "ELX-003": {
-      "September": null,
-      "October": null,
-      "November": null,
-      "December": null
+      "Overall Net 💴": 0
+    },
+    "ELX-004": {
+      "Overall Net 💴": 0
+    },
+    "ELX-005": {
+      "Overall Net 💴": 0
     }
   },
   "bondGuidelines": [
@@ -518,6 +961,34 @@
       "detail": "Maximum earned per member per week"
     }
   ],
-  "activityLog": {}
-              }
-                
+  "activityLog": [
+    {
+      "week": "Week 1",
+      "entry": 1,
+      "name": "TEST NAME",
+      "type": "Gambit",
+      "date": "2026-09-12"
+    },
+    {
+      "week": "Week 1",
+      "entry": 2,
+      "name": "Womp",
+      "type": "Conquest",
+      "date": "2026-09-15"
+    },
+    {
+      "week": "Week 1",
+      "entry": 3,
+      "name": "Test Name",
+      "type": "Commission",
+      "date": "2026-09-16"
+    },
+    {
+      "week": "Week 1",
+      "entry": 4,
+      "name": "Comp Day",
+      "type": "Colloseum",
+      "date": "2026-09-17"
+    }
+  ]
+}
